@@ -1,0 +1,42 @@
+.grid div{
+	width: 30px;
+	height: 30px;
+	background-color: rgb(254,169,95);
+}
+
+.grid{
+	width: 450px;
+	height: 450px;
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+	border: 15px solid;
+}
+
+body{
+	background-color: rgb(254,169,95)
+}
+
+.snake{
+	background-color: white !important;
+}
+
+.food{
+	background-color: rgb(255,0,100) !important;
+}
+
+.score{
+	font-family: monospace;
+	font-weight: bolder;
+	font-size: 25px;
+}
+
+.head{
+	background-color: green !important;
+}
+
+.score-text{
+	font-family: monospace;
+	font-weight: bolder;
+	font-size: 25px;
+}

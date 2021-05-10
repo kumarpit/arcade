@@ -1,0 +1,51 @@
+html,body{
+	margin: 0px;
+	height: 100%;
+}
+
+
+.main-text{
+	color: white;
+	font-size: 50px;
+	font-family: 'Press Start 2P', cursive;
+	margin: 0px;
+	text-align: center;
+	padding-top: 250px;
+}
+
+p{
+	font-family: monospace;
+	color: white;
+	text-align: center;
+	font-size: 17px;
+}
+
+.one{
+	height: 100%;
+	width: 100%;
+	background-color: black;
+}
+
+.two{
+	height: 100%;
+	width: 100%;
+	background-color: rgb(254,169,94);
+}
+
+.three{
+	height: 100%;
+	width: 100%;
+	background-color: rgb(255,0,100);
+}
+
+.four{
+	height: 100%;
+	width: 100%;
+	background-color: cornflowerblue;
+}
+
+.five{
+	height: 100%;
+	width: 100%;
+	background-color: teal;
+}

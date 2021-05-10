@@ -1,0 +1,22 @@
+/*.canvas-container{
+	width: 100%;
+	text-align: center;
+	background-color: rgb(255,0,100);
+}*/
+
+#gameCanvas{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-color: black;
+	/*always set canvas width and height using style in the index.html file itself to avoid blurry images*/
+}
+
+body{
+	background-color: rgb(255,0,100);
+	/*background-color: blue;*/
+}
+
