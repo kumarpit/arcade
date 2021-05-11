@@ -10,5 +10,11 @@
 }
 
 body{
-	background-color: cornflowerblue;
+	background-color: white;
 }
+
+h2, h3{
+	font-family: "Press Start 2P", cursive;
+	margin-left: 28px; /*temporary*/
+}
+

@@ -10,7 +10,8 @@ const matrix = [
 	[0, 1, 0]
 ];
 
-const colors = ["red", "blue", "violet", "yellow", "purple", "pink", "green", "orange"]
+const colors = ["red", "lightblue", "beige", "yellow", "hotpink", "pink", "red", "orange"]
+//const colors = ["white", "white", "white", "white", "white", "white", "white", "white"]
 function createMatrix(w, h){
 	const matrix = []
 	while(h--){ //0 is equivalent to false in logical context, hence when h is 0 while loop will stop evaluating
@@ -77,7 +78,7 @@ function drawGrid(){
 		row.forEach((value, x) => {
 				ctx.beginPath()
 				ctx.strokeStyle = "black";
-				ctx.lineWidth = 2/scl;
+				ctx.lineWidth = 0.1/scl;
 				ctx.rect(x,
 				         y,
 				         1, 1);
