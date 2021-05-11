@@ -10,8 +10,7 @@ const matrix = [
 	[0, 1, 0]
 ];
 
-const colors = ["red", "blue", "violet", "yellow", "purple", "pink", "cornflowerblue", "orange"]
-
+const colors = ["red", "blue", "violet", "yellow", "purple", "pink", "green", "orange"]
 function createMatrix(w, h){
 	const matrix = []
 	while(h--){ //0 is equivalent to false in logical context, hence when h is 0 while loop will stop evaluating
@@ -21,7 +20,6 @@ function createMatrix(w, h){
 }
 
 const arena = createMatrix(17, 27)
-
 const player = {
 	matrix: createPiece("T"),
 	pos: {x:2, y:0}
@@ -68,7 +66,7 @@ function drawMatrix(matrix, offset){
 }
 
 function draw(){
-	ctx.fillStyle = "#333333"
+	ctx.fillStyle = "white"
 	ctx.fillRect(0, 0, canv.width, canv.height)
 	drawMatrix(player.matrix, player.pos)
 	drawMatrix(arena, {x:0, y:0})
@@ -79,7 +77,7 @@ function drawGrid(){
 		row.forEach((value, x) => {
 				ctx.beginPath()
 				ctx.strokeStyle = "black";
-				ctx.lineWidth = 4/scl;
+				ctx.lineWidth = 2/scl;
 				ctx.rect(x,
 				         y,
 				         1, 1);
@@ -94,6 +92,7 @@ function playerDrop(){
 		player.pos.y--;
 		merge(arena, player);
 		resetPlayer();
+		checkSweep();
 		//drawArena()
 	}
 	dropCounter = 0 	
@@ -183,6 +182,16 @@ function createPiece(type){
 				 [0, 7, 0, 0],
 				 [0, 7, 0, 0]]
 	}
+}
+
+function checkSweep() {
+	let results = []
+	for(let i = 0; i < arena.length; i++){
+			results.push(arena[i].every(val => {
+			return val >= 1
+		}))
+	}
+	console.log(results)
 }
 
 update() //to initialize the game
