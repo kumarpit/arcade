@@ -10,7 +10,7 @@ const matrix = [
 	[0, 1, 0]
 ];
 
-const colors = ["red", "lightblue", "beige", "yellow", "hotpink", "pink", "red", "orange"]
+const colors = ["null", "lightblue", "beige", "yellow", "hotpink", "pink", "red", "orange"]
 //const colors = ["white", "white", "white", "white", "white", "white", "white", "white"]
 function createMatrix(w, h){
 	const matrix = []
