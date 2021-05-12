@@ -238,12 +238,12 @@ function gameOver(){
 function update(){
 	let blinkOn = ship.blinkNum % 2 === 0
 	//draw space/bg
-	ctx.fillStyle = "rgb(255,0,100)"; //everytime we update, we drawing new canvas over the old one hence no need to erase stuff drawn previously
+	ctx.fillStyle = "black"; //everytime we update, we drawing new canvas over the old one hence no need to erase stuff drawn previously
 	ctx.fillRect(0, 0, canv.width, canv.height);
 
 	//draw ship (TRIANGULAR)
 	if(blinkOn && !ship.dead){
-		ctx.strokeStyle = "black";
+		ctx.strokeStyle = "white";
 		ctx.lineWidth = SHIP_SIZE/8;
 		ctx.beginPath();
 		ctx.moveTo( //tip of the ship
@@ -272,7 +272,7 @@ function update(){
 
 	//draw lasers
 	for(let i=0; i < ship.lasers.length; i++){
-		ctx.fillStyle = "black"
+		ctx.fillStyle = "white"
 		ctx.beginPath()
 		ctx.arc(
 			ship.lasers[i].x,
@@ -289,7 +289,7 @@ function update(){
 	let x,y,xv,yv,r,a,vert,offs
 
 	for(let i=0; i < asteroids.length; i++){
-		ctx.strokeStyle = "black"
+		ctx.strokeStyle = "white"
 		ctx.lineWidth = SHIP_SIZE/8
 		x = asteroids[i].x
 		y = asteroids[i].y
@@ -366,7 +366,7 @@ function update(){
 		//draw thruster
 		//ctx.fillStyle = "white"
 		if(blinkOn && !ship.dead){
-			ctx.strokeStyle = "black";
+			ctx.strokeStyle = "white";
 			ctx.lineWidth = SHIP_SIZE/8;
 			ctx.beginPath();
 			ctx.moveTo( //rear left
@@ -403,7 +403,7 @@ function update(){
 		ctx.textAlign = "center"
 		ctx.textBaseLine = "middle"
 		ctx.fillStyle = "rgba(0,0,0, " + textAlpha + ")";
-		ctx.font = "normal " + 	TEXT_SIZE + "px Press Start 2P";
+		ctx.font = "normal " + 	TEXT_SIZE + "px Arial";
 		ctx.fillText(text, canv.width/2, SHIP_SIZE)
 		textAlpha -= (1.0/TEXT_FADE_TIME/FPS)
 	}
@@ -417,7 +417,7 @@ function update(){
 		let y = SHIP_SIZE
 		let r = 15
 		let a = 90/180*Math.PI
-		ctx.strokeStyle = "black";
+		ctx.strokeStyle = "white";
 		ctx.lineWidth = 30/8;
 		ctx.beginPath();
 		ctx.moveTo( //tip of the ship
@@ -441,9 +441,9 @@ function update(){
 	ctx.beginPath()
 	ctx.textAlign = "right"
 	ctx.textBaseLine = "middle"
-	ctx.fillStyle = "black"
-	ctx.font = "bold " +TEXT_SIZE*1.2 + "px monospace";
-	ctx.fillText(score, canv.width - SHIP_SIZE/2, SHIP_SIZE)
+	ctx.fillStyle = "white"
+	ctx.font = "normal " + TEXT_SIZE*1 + "px 'Press Start 2P'";
+	ctx.fillText(score, canv.width - SHIP_SIZE/2, SHIP_SIZE + 15)
 
 	//draw highScore
 	// ctx.beginPath()
