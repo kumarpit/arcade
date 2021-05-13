@@ -1,13 +1,55 @@
 body{
 	margin: 0;
 	font-family: "Press Start 2P";
-	/*background: url(https://media.giphy.com/media/3oEduMhFrYvKk4giac/giphy.gif);*/
+	/*background: url(https://wallpapercave.com/wp/wp742784.png);*/
 	background-color: darkblue; 
 	font-style: italic;
 	color: #fff;
 	no-repeat 50% 50%;
 	background-size: cover;
 }
+
+/*//loader*/
+
+.loader-wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: darkblue;
+}
+
+.sp-loadbar {
+	width: 50px;
+	height: 18px;
+	border: 1px white solid;
+	border-radius: 4px;
+	background: linear-gradient(-60deg, transparent 0%, transparent 50%, white 50%, white 75%, transparent 75%, transparent);
+	background-size: 20px 30px;
+	background-position: 0px 0px;
+	/*-webkit-animation: 0.8s infinite linear;*/
+	animation: sp-loadbar 0.8s infinite linear;
+	/*animation-play-state: running;*/
+}
+
+@keyframes sp-loadbar {
+	0% { 
+		background-position: 0px 0px;
+	}
+	100% { 
+		background-position: -20px 0px;
+	}
+}
+
+/*@keyframes sp-loadbar {
+	from { background-position: 0px 0px; }
+	to { background-position: -20px 0px; }
+}*/
+
 
 .divider{
 	width: 100%;
@@ -32,20 +74,20 @@ body{
 
 .whitespace{
 	width: 100%;
-	height: 30px;
+	height: 20px;
 }
 
 .whitespace2{
 	width: 100%;
-	height: 50px;
+	height: 30vh;
 }
 
 .navbar .navbar-container{
 	display: flex;
 	padding: 12px 0;
-	font-size: 16px;
+	font-size: 1.5vw;
 	justify-content: space-between;
-	font-family: monospace !important;
+	/*font-family: monospace !important;*/
 }
 
 
@@ -77,6 +119,8 @@ body{
 	transition-duration: 0.1s;
 	opacity: 0;
 }
+
+
 
 .menu-item-img{
 	pointer-events: none;
@@ -111,6 +155,7 @@ body{
 	color: red;
 	pointer-events: none;
 	mix-blend-mode: difference;
+	width: 100%;
 
 }
 
@@ -133,7 +178,7 @@ body{
 .menu-item-link,
 .marquee span{
 	white-space: nowrap;
-	font-size: 5vw;
+	font-size: 3.5vw;
 	padding: 0 1vw;
 	font-weight: 600;
 	line-height: 1.20;
