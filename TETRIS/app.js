@@ -14,7 +14,7 @@ const colors = ["null", "lightblue", "beige", "yellow", "hotpink", "pink", "red"
 //const colors = ["white", "white", "white", "white", "white", "white", "white", "white"]
 function createMatrix(w, h){
 	const matrix = []
-	while(h--){ //0 is equivalent to false in logical context, hence when h is 0 while loop will stop evaluating
+	while(h--){ 
 		matrix.push(new Array(w).fill(0));
 	}
 	return matrix
@@ -92,8 +92,8 @@ function playerDrop(){
 	if(collide(arena, player)){
 		player.pos.y--;
 		merge(arena, player);
+		checkCompletedRow();
 		resetPlayer();
-		checkSweep();
 		//drawArena()
 	}
 	dropCounter = 0 	
@@ -185,14 +185,40 @@ function createPiece(type){
 	}
 }
 
-function checkSweep() {
+function checkCompletedRow() {
 	let results = []
+
 	for(let i = 0; i < arena.length; i++){
 			results.push(arena[i].every(val => {
 			return val >= 1
 		}))
 	}
-	console.log(results)
+	// console.log(results, results.length, arena.length)
+
+	//delete rows
+	for(let i = 0; i < results.length; i++){
+		if(results[i]){
+			// for(let j = 0; j < arena[i].length; j++){
+			// 	arena[i][j] = 0
+			// }
+
+			deleteRows(i)
+			moveRowsDown(i)
+		}
+	}
+
+}
+
+function deleteRows(index){
+	for(let j = 0; j < arena[index].length; j++){
+		arena[index][j] = 0
+	}
+}
+
+function moveRowsDown(index){
+	for(let j = index; j > 0; j--){
+		arena[j] = arena[j-1]
+	}
 }
 
 update() //to initialize the game
