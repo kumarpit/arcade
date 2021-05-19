@@ -2,7 +2,7 @@ const canv = document.getElementById("gameCanvas");
 const ctx = canv.getContext("2d");
 const scl = 20
 const scrTxt = document.querySelector("#score")
-let score;
+let score = 0;
 
 ctx.scale(scl, scl);
 
@@ -244,8 +244,11 @@ function checkCompletedRow(){
 
 		const row = arena.splice(i, 1)[0].fill(0)
 		arena.unshift(row);
+		score++
 		i++
 	}
+
+	scrTxt.innerText = score.toString()
 }
 
 //flash when there is a combo
