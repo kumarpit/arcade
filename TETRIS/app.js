@@ -1,6 +1,8 @@
 const canv = document.getElementById("gameCanvas");
 const ctx = canv.getContext("2d");
 const scl = 20
+const scrTxt = document.querySelector("#score")
+let score;
 
 ctx.scale(scl, scl);
 
@@ -21,9 +23,10 @@ function createMatrix(w, h){
 }
 
 const arena = createMatrix(17, 27)
+
 const player = {
 	matrix: createPiece("T"),
-	pos: {x:2, y:0}
+	pos: {x:0, y:0}
 }
 
 function collide(arena, player){
@@ -92,8 +95,8 @@ function playerDrop(){
 	if(collide(arena, player)){
 		player.pos.y--;
 		merge(arena, player);
-		checkCompletedRow();
 		resetPlayer();
+		checkCompletedRow();
 		//drawArena()
 	}
 	dropCounter = 0 	
@@ -150,6 +153,14 @@ function resetPlayer(){
 	player.matrix = createPiece(pieces[pieces.length * Math.random() | 0])
 	player.pos.y = 0;
 	player.pos.x = (arena[0].length/2 | 0) - (player.matrix[0].length/2 | 0);
+
+	//game over condition
+	if(collide(arena, player)){
+		arena.forEach(row => {
+			row.fill(0)
+		})
+		score = 0
+	}
 }
 
 function createPiece(type){
@@ -185,35 +196,37 @@ function createPiece(type){
 	}
 }
 
-function checkCompletedRow() {
-	let results = []
+// function checkCompletedRow() {
+// 	let results = []
+// 	let combo = 0
 
-	for(let i = 0; i < arena.length; i++){
-			results.push(arena[i].every(val => {
-			return val >= 1
-		}))
-	}
-	// console.log(results, results.length, arena.length)
+// 	for(let i = 0; i < arena.length; i++){
+// 			results.push(arena[i].every(val => {
+// 			return val >= 1
+// 		}))
+// 	}
+// 	// console.log(results, results.length, arena.length)
 
-	//delete rows
-	for(let i = 0; i < results.length; i++){
-		if(results[i]){
-			// for(let j = 0; j < arena[i].length; j++){
-			// 	arena[i][j] = 0
-			// }
+// 	//delete rows
+// 	for(let i = 0; i < results.length; i++){
+// 		if(results[i]){
+// 			// for(let j = 0; j < arena[i].length; j++){
+// 			// 	arena[i][j] = 0
+// 			// }
+// 			score++
+// 			combo++
+// 			// scrTxt.innerHTML = score;
+// 			arena[i].fill(0) //delete rows
+// 			moveRowsDown(i)
+// 		}
+// 	}
 
-			deleteRows(i)
-			moveRowsDown(i)
-		}
-	}
+// 	//flashing animation when combo
+// 	if(combo > 2){
+// 		flash()
+// 	}
 
-}
-
-function deleteRows(index){
-	for(let j = 0; j < arena[index].length; j++){
-		arena[index][j] = 0
-	}
-}
+// }
 
 function moveRowsDown(index){
 	for(let j = index; j > 0; j--){
@@ -221,6 +234,26 @@ function moveRowsDown(index){
 	}
 }
 
+function checkCompletedRow(){
+	outer: for(let i = arena.length - 1; i > 0; i--){
+		for(let j = 0; j < arena[i].length; j++){
+			if(arena[i][j] === 0){
+				continue outer
+			}
+		}
+
+		const row = arena.splice(i, 1)[0].fill(0)
+		arena.unshift(row);
+		i++
+	}
+}
+
+//flash when there is a combo
+function flash(){
+
+}
+
+resetPlayer()
 update() //to initialize the game
 document.addEventListener("keydown", e => {
 	switch(e.keyCode){
@@ -234,7 +267,9 @@ document.addEventListener("keydown", e => {
 			playerDrop()
 			break
 		case 38:
-			rotateMatrix()
+			if(player.matrix !== createPiece("O")){ //NOT WORKING
+				rotateMatrix()
+			}
 			break
 	}
 })
