@@ -95,7 +95,7 @@ function playerDrop(){
 	if(collide(arena, player)){
 		player.pos.y--;
 		merge(arena, player);
-		resetPlayer();
+		resetPlayer(false);
 		checkCompletedRow();
 		//drawArena()
 	}
@@ -148,9 +148,18 @@ function rotateMatrix() {
 	}
 }
 
-function resetPlayer(){
+let currPiece, nextPiece
+
+function resetPlayer(start){
 	const pieces = "TOSJLZI"
-	player.matrix = createPiece(pieces[pieces.length * Math.random() | 0])
+	currPiece = nextPiece
+
+	if(start){
+		player.matrix = createPiece(pieces[pieces.length * Math.random() | 0])
+	}else{
+		player.matrix = currPiece
+	}
+
 	player.pos.y = 0;
 	player.pos.x = (arena[0].length/2 | 0) - (player.matrix[0].length/2 | 0);
 
@@ -161,6 +170,9 @@ function resetPlayer(){
 		})
 		score = 0
 	}
+
+	nextPiece = createPiece(pieces[pieces.length * Math.random() | 0])
+	console.log(nextPiece)
 }
 
 function createPiece(type){
@@ -262,7 +274,7 @@ function flash(){
 	
 }
 
-resetPlayer()
+resetPlayer(true)
 update() //to initialize the game
 document.addEventListener("keydown", e => {
 	switch(e.keyCode){
