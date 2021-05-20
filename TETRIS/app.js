@@ -109,7 +109,7 @@ function playerMove(dir) {
 	}
 }
 
-let dropInterval = 1000
+let dropInterval = 800
 let dropCounter = 0
 let lastTime = 0
 
@@ -245,6 +245,12 @@ function checkCompletedRow(){
 		const row = arena.splice(i, 1)[0].fill(0)
 		arena.unshift(row);
 		score++
+		if(score % 2 == 0){
+			if(dropInterval > 0){
+				dropInterval -= 50
+				console.log("faster")
+			}
+		}
 		i++
 	}
 
@@ -253,7 +259,7 @@ function checkCompletedRow(){
 
 //flash when there is a combo
 function flash(){
-
+	
 }
 
 resetPlayer()
