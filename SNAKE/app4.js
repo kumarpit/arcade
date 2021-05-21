@@ -10,19 +10,23 @@ document.addEventListener("DOMContentLoaded", () => {
 	let speed = 0.9
 	let intervalTime = 200
 	let interval = 0
+	let lastTime = 0
+	let countTime = 0
+	let deltaTime = 0
 
 	function startGame(){
 		currentSnake.forEach(snake => squares[snake].classList.remove("snake"))
 		currentSnake = [1,0]
 		squares[foodIndex].classList.remove("food")
-		clearInterval(interval)
+		// clearInterval(interval)
 		score = 0
 		randomFood()
 		direction = 0
 		displayScore.textContent = score
 		currentIndex = 0
 		currentSnake.forEach(snake => squares[snake].classList.add("snake"))
-		interval = setInterval(checkMoveOutcomes, intervalTime)
+		// interval = setInterval(checkMoveOutcomes, intervalTime)
+		window.requestAnimationFrame(checkMoveOutcomes)
 	}
 
 	function control(e){
@@ -39,32 +43,43 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
-	function checkMoveOutcomes(){
-		if (direction != 0){
-			if ((currentSnake[0] + width >= (width*width) && direction === width) ||
-				(currentSnake[0] - width < 0 && direction === -width) ||
-				(currentSnake[0] % width === width - 1 && direction === 1) ||
-				(currentSnake[0] % width === 0 && direction === -1) ||
-				(squares[currentSnake[0] + direction].classList.contains("snake"))){
-					return clearInterval(interval)
-			}
-
-			const tail = currentSnake.pop()
-			squares[tail].classList.remove("snake")
-			currentSnake.unshift(currentSnake[0] + direction)
-
-		if (squares[currentSnake[0]].classList.contains("food")){
-				squares[tail].classList.add("snake")
-				currentSnake.push(tail)
-				randomFood()
-				score++
-				displayScore.textContent = score
-				// clearInterval(interval)
-				// intervalTime *= speed
-				// interval = setInterval(checkMoveOutcomes, interval)
-			}
-			squares[currentSnake[0]].classList.add("snake")
+	function checkMoveOutcomes(time){
+		if(time){
+			deltaTime = time - lastTime
+			countTime += deltaTime
+			lastTime = time
 		}
+
+		if(countTime > intervalTime){
+			countTime = 0
+			if (direction != 0){
+				if ((currentSnake[0] + width >= (width*width) && direction === width) ||
+					(currentSnake[0] - width < 0 && direction === -width) ||
+					(currentSnake[0] % width === width - 1 && direction === 1) ||
+					(currentSnake[0] % width === 0 && direction === -1) ||
+					(squares[currentSnake[0] + direction].classList.contains("snake"))){
+						return
+				}
+
+				const tail = currentSnake.pop()
+				squares[tail].classList.remove("snake")
+				currentSnake.unshift(currentSnake[0] + direction)
+
+			if (squares[currentSnake[0]].classList.contains("food")){
+					squares[tail].classList.add("snake")
+					currentSnake.push(tail)
+					randomFood()
+					score++
+					displayScore.textContent = score
+					// clearInterval(interval)
+					// intervalTime *= speed
+					// interval = setInterval(checkMoveOutcomes, interval)
+				}
+				squares[currentSnake[0]].classList.add("snake")
+			}
+		}
+
+		requestAnimationFrame(checkMoveOutcomes)
 	}
 
 
