@@ -106,7 +106,8 @@ function drawGrid(){
 		row.forEach((value, x) => {
 				ctx.beginPath()
 				ctx.strokeStyle = "black";
-				ctx.lineWidth = 0.1/scl;
+				// ctx.lineWidth = 0.1/scl;
+				ctx.lineWidth = 0.2/scl;
 				ctx.rect(x,
 				         y,
 				         1, 1);

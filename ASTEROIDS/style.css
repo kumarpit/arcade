@@ -4,19 +4,63 @@
 	background-color: rgb(255,0,100);
 }*/
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+.main{
+	display: flex;
+	/* width: 100%; */
+	justify-content: space-between;
+	height: 100vh;
+}
+
+.text{
+	width: 37%;
+	margin: 2em 0 3em 1em;
+}
+
+h1{
+	font-family: "Press Start 2P";
+}
+
+h2{
+	font-family: "bungee";
+	text-align: center;
+	width: 30%;
+	font-size: 1.2em;
+	border: 5px solid black;
+	border-radius: 2em;
+	/* background-color: yellow; */
+	/* margin-left: 5em; */
+	/* box-shadow: 10px 6px white; */
+}
+
+h2:hover{
+	background-color: white;
+	cursor: pointer;
+}
+
+p{
+	font-family: "poppins";
+	line-height: 1.3em;
+	font-size: 1em;
+	text-align: justify;
+}
+
 #gameCanvas{
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin: auto;
+	margin: auto 4em auto auto;
 	background-color: black;
+	/* border: 8px solid black; */
 	/*always set canvas width and height using style in the index.html file itself to avoid blurry images*/
 }
 
 body{
-	background-color: black;
+	background-color: #c8ff00;
 	/*background-color: blue;*/
 }
 

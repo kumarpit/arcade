@@ -1,7 +1,7 @@
 .grid div{
 	width: 30px;
 	height: 30px;
-	background-color: rgb(254,169,95);
+	background-color: #10e7e2;
 }
 
 h1{
@@ -21,7 +21,7 @@ h1{
 }
 
 body{
-	background-color: rgb(254,169,95)
+	background-color: #10e7e2
 }
 
 .snake{
