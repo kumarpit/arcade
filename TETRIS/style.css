@@ -2,6 +2,8 @@
 
 body{
 	margin: 0;
+	/* background-color: #5300ff; */
+	background-color: whitesmoke;
 }
 
 .container{
@@ -13,6 +15,7 @@ body{
 	justify-content: space-around;
 	border: 5px solid black;
 	width: 50%;
+	/* box-shadow: 3px 3px 10px black; */
 }
 
 #nextPiece{
@@ -25,10 +28,6 @@ body{
 	background-color: white;
 	border: 1.5px solid black;
 	/*box-shadow: 5px 5px blue;*/
-}
-
-body{
-	background-color: white;
 }
 
 div.heading-text{
@@ -56,6 +55,8 @@ h3{
 
 h2{
 	font-size: 2.3em;
+	/* writing-mode: vertical-lr;
+	text-orientation: upright; */
 	/* text-shadow: 3px 0 black; */
 }
 

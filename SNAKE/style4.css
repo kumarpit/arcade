@@ -4,12 +4,19 @@
 	background-color: rgb(254,169,95);
 }
 
+h1{
+	font-family: "Press Start 2P";
+}
+
+.hide-temp{
+	display: none;
+}
 .grid{
 	width: 450px;
 	height: 450px;
 	display: flex;
 	flex-wrap: wrap;
-	margin: auto;
+	margin: -1em auto 0 auto;
 	border: 15px solid;
 }
 
@@ -32,10 +39,12 @@ body{
 }
 
 .head{
-	background-color: green !important;
+	padding: 1em;
+	line-height: 0.5em;
+	width: 30%;
 }
 
-.score-text{
+h3{
 	font-family: "Press Start 2P", cursive;
 	font-weight: bolder;
 	font-size: 17px;
