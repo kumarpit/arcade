@@ -1,12 +1,29 @@
-#gameCanvas{
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
-	background-color: white;
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+body{
+	margin: 0;
+}
+
+.container{
+	display: flex;
+	margin-top: -3.3em;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1em;
+	justify-content: space-around;
+	border: 5px solid black;
+	width: 50%;
+}
+
+#nextPiece{
 	border: 2px solid black;
+	/* margin-left: 2em; */
+	margin-top: -1em;
+}
+
+#gameCanvas{
+	background-color: white;
+	border: 1.5px solid black;
 	/*box-shadow: 5px 5px blue;*/
 }
 
@@ -14,9 +31,40 @@ body{
 	background-color: white;
 }
 
+div.heading-text{
+	line-height: 1em;
+	margin-left: 2em;
+	height: 100%;
+	width: 20%;
+}
+
 h2, h3{
-	font-family: "Press Start 2P", cursive;
-	margin-left: 28px; /*temporary*/
-	text-shadow: 2px 2px grey;
+	font-family: "Press Start 2P";
+	/* margin-left: 2em; */
+	font-weight: bolder;
+	/* text-shadow: 2px 2px 5px 5px yellow; */
+}
+
+.score-text{
+	text-align: left;
+}
+
+h3{
+	font-size: 1em;
+	margin-left: 0.7em;
+}
+
+h2{
+	font-size: 2.3em;
+	/* text-shadow: 3px 0 black; */
+}
+
+.right-canvas{
+	text-align: center;
+}
+
+p{
+	font-family: "Press Start 2P";
+	font-size: 1.5em;
 }
 

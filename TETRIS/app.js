@@ -1,10 +1,13 @@
 const canv = document.getElementById("gameCanvas");
+const canv2 = document.getElementById("nextPiece");
+const ctx2 = canv2.getContext("2d")
 const ctx = canv.getContext("2d");
 const scl = 20
 const scrTxt = document.querySelector("#score")
 let score = 0;
 
 ctx.scale(scl, scl);
+ctx2.scale(scl, scl);
 
 const matrix = [
 	[0, 0, 0],
@@ -23,6 +26,7 @@ function createMatrix(w, h){
 }
 
 const arena = createMatrix(17, 27)
+const notArena = createMatrix(10, 10)
 
 const player = {
 	matrix: createPiece("T"),
@@ -69,11 +73,32 @@ function drawMatrix(matrix, offset){
 	});
 }
 
+function drawNextPiece(matrix, offset){
+	ctx2.clearRect(0, 0, canv2.width, canv2.height)
+	matrix.forEach((row, y) => {
+		row.forEach((value, x) => {
+			if (value !== 0){
+				ctx2.beginPath()
+				ctx2.fillStyle = colors[value];
+				ctx2.strokeStyle = "black";
+				ctx2.lineWidth = 4/scl;
+				ctx2.rect(x + offset.x,
+				         y + offset.y,
+				         1, 1);
+				ctx2.fill();
+				ctx2.stroke();
+			}
+		});
+	});
+}
+
+
 function draw(){
 	ctx.fillStyle = "white"
 	ctx.fillRect(0, 0, canv.width, canv.height)
 	drawMatrix(player.matrix, player.pos)
 	drawMatrix(arena, {x:0, y:0})
+	// drawMatrix(notArena, {x: 0, y: 0}) //!!!
 }
 
 function drawGrid(){
@@ -171,8 +196,20 @@ function resetPlayer(start){
 		score = 0
 	}
 
+	notArena.forEach(row => {
+		row.fill(0)
+	})
 	nextPiece = createPiece(pieces[pieces.length * Math.random() | 0])
+	merge(notArena, {matrix: nextPiece, pos: {x: 0, y: 0} })
+	drawNextPiece(notArena, {x: 4, y: 3})
+
+	// drawMatrix(notArena, {x: 0, y: 0})
+	// showNextPiece(nextPiece)
 	console.log(nextPiece)
+}
+
+function showNextPiece(){
+	//!!!
 }
 
 function createPiece(type){
