@@ -25,8 +25,8 @@ const LIVES = 3
 const ROIDS_POINT_LRG = 20
 const ROIDS_POINT_MED = 50
 const ROIDS_POINT_SMALL = 100
-const bg = "#c8ff00"
-const strk = "black"
+const bg = "black"
+const strk = "white"
 let score 
 
 // let lasers = []

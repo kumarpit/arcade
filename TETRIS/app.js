@@ -116,6 +116,21 @@ function drawGrid(){
 	});
 }
 
+function drawGrid2(){
+	notArena.forEach((row, y) => {
+		row.forEach((value, x) => {
+				ctx2.beginPath()
+				ctx2.strokeStyle = "black";
+				// ctx.lineWidth = 0.1/scl;
+				ctx2.lineWidth = 0.2/scl;
+				ctx2.rect(x,
+				         y,
+				         1, 1);
+				ctx2.stroke();
+		});
+	});
+}
+
 function playerDrop(){
 	player.pos.y++
 	if(collide(arena, player)){
@@ -203,6 +218,7 @@ function resetPlayer(start){
 	nextPiece = createPiece(pieces[pieces.length * Math.random() | 0])
 	merge(notArena, {matrix: nextPiece, pos: {x: 0, y: 0} })
 	drawNextPiece(notArena, {x: 4, y: 3})
+	drawGrid2()
 
 	// drawMatrix(notArena, {x: 0, y: 0})
 	// showNextPiece(nextPiece)

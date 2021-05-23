@@ -3,40 +3,43 @@
 body{
 	margin: 0;
 	/* background-color: #5300ff; */
-	background-color: #3968cb;
+	background-color: blue;
 }
 
 .container{
 	display: flex;
-	margin-top: -3.3em;
-	margin-left: auto;
-	margin-right: auto;
+	margin: auto;
 	padding: 1em;
 	justify-content: space-around;
 	border: 5px solid black;
 	background-color: whitesmoke;
-	width: 50%;
+	width: 52%;
 	/* box-shadow: 3px 3px 10px black; */
 }
 
 #nextPiece{
-	border: 3px solid black;
+	border: 4px solid black;
 	/* margin-left: 2em; */
 	margin-top: -1em;
 }
 
 #gameCanvas{
 	background-color: white;
-	border: 3px solid black;
+	border: 4px solid black;
 	/*box-shadow: 5px 5px blue;*/
 }
 
-div.heading-text{
+.logo{
+	line-height: 0.8em;
+}
+
+
+/* div.heading-text{
 	line-height: 1em;
 	margin-left: 2em;
 	height: 100%;
 	width: 20%;
-}
+} */
 
 h2, h3{
 	font-family: "Press Start 2P";
@@ -56,6 +59,7 @@ h3{
 
 h2{
 	font-size: 2.3em;
+	transform: scale(1, 1.5);
 	/* writing-mode: vertical-lr;
 	text-orientation: upright; */
 	/* text-shadow: 3px 0 black; */

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- add asteroids to main screen -->
 	<title>ASTEROIDS</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -11,19 +12,24 @@
 	<div class="main">
 		<div class="text">
 			<h1>ASTEROIDS</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae orci diam. Proin congue, nisl ac sagittis accumsan, dolor orci ornare nisi, vel ultricies enim lacus sit amet mi. Cras convallis enim at sodales feugiat. Phasellus quis imperdiet odio, ac semper tellus. Integer massa quam, cursus at ipsum in, hendrerit fermentum nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce suscipit arcu sed ipsum suscipit, quis suscipit orci convallis.
-
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-			</p>
-			
-			<h2>KNOW MORE</h2>
+			<h2>Press SPACE TO START</h2>
 		</div>
 		<div class="canvas-wrapper">
-			<canvas id="gameCanvas" width="670" height="470"></canvas> 
+			<canvas id="gameCanvas" class="hide" width="900" height="600"></canvas> 
 		</div>
 	</div>
 	
 
 	<script type="text/javascript" src="app.js"></script>
+	<script>
+		const start = document.getElementsByClassName("text");
+		const canvs = document.getElementById("gameCanvas")
+		window.addEventListener("keydown", e => {
+			if(e.keyCode == 32){
+				start[0].classList.add("hide")
+				canvs.classList.remove("hide")
+			}
+		})
+	</script>
 </body>
 </html>
