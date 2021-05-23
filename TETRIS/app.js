@@ -25,8 +25,8 @@ function createMatrix(w, h){
 	return matrix
 }
 
-const arena = createMatrix(17, 27)
-const notArena = createMatrix(10, 10)
+const arena = createMatrix(canv.width/scl, canv.height/scl)
+const notArena = createMatrix(canv2.width/scl, canv2.height/scl)
 
 const player = {
 	matrix: createPiece("T"),
@@ -217,7 +217,7 @@ function resetPlayer(start){
 	})
 	nextPiece = createPiece(pieces[pieces.length * Math.random() | 0])
 	merge(notArena, {matrix: nextPiece, pos: {x: 0, y: 0} })
-	drawNextPiece(notArena, {x: 4, y: 3})
+	drawNextPiece(notArena, {x: 3, y: 2})
 	drawGrid2()
 
 	// drawMatrix(notArena, {x: 0, y: 0})

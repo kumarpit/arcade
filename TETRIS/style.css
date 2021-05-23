@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
+section.game{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
 body{
 	margin: 0;
 	/* background-color: #5300ff; */
@@ -8,12 +15,11 @@ body{
 
 .container{
 	display: flex;
-	margin: auto;
 	padding: 1em;
 	justify-content: space-around;
 	border: 5px solid black;
 	background-color: whitesmoke;
-	width: 52%;
+	width: 45%;
 	/* box-shadow: 3px 3px 10px black; */
 }
 
