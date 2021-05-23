@@ -1,18 +1,14 @@
-/*.canvas-container{
-	width: 100%;
-	text-align: center;
-	background-color: rgb(255,0,100);
-}*/
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
+.body{
+	margin: 0;
+}
 .main{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* width: 100%; */
-	height: 100vh;
+	height: 95vh;
 }
 
 .text{
@@ -31,12 +27,20 @@ h1{
 h2{
 	font-family: "Press Start 2P";
 	font-size: 0.9em;
+	animation: animate 1.5s linear infinite;
 }
 
-/* h2:hover{
-	background-color: white;
-	cursor: pointer;
-} */
+@keyframes animate{
+	0%{
+	  opacity: 0;
+	}
+	50%{
+	  opacity: 0.7;
+	}
+	100%{
+	  opacity: 0;
+	}
+  }
 
 p{
 	font-family: "poppins";
@@ -50,18 +54,13 @@ p{
 }
 
 #gameCanvas{
-	/* position: absolute;
-	top: 0;
-	left: 0; */
-	margin: auto;
 	background-color: black;
-	/* border: 8px solid black; */
+	margin: 0;
 	/*always set canvas width and height using style in the index.html file itself to avoid blurry images*/
 }
 
 body{
 	background-color: black;
-	/*background-color: blue;*/
 }
 
 h3{

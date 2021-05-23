@@ -31,7 +31,7 @@ let score
 
 // let lasers = []
 let interval = 0
-let pause = false
+let pause = false;
 
 let level = 1
 let asteroids, ship, text, textAlpha, lives, highScore
@@ -48,7 +48,7 @@ let lastTime = 0
 let deltaTime = 0
 let countTime = 0
 let frameInterval = 1000/FPS | 0
-window.requestAnimationFrame(update)
+// window.requestAnimationFrame(update)
 
 function keydown(e){
 	if(ship.dead){

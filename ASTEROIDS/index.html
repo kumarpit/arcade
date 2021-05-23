@@ -8,14 +8,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-	
 	<div class="main">
 		<div class="text">
 			<h1>ASTEROIDS</h1>
 			<h2>Press SPACE TO START</h2>
 		</div>
 		<div class="canvas-wrapper">
-			<canvas id="gameCanvas" class="hide" width="900" height="600"></canvas> 
+			<canvas id="gameCanvas" class="hide" width="950" height="550"></canvas> 
 		</div>
 	</div>
 	
@@ -28,6 +27,7 @@
 			if(e.keyCode == 32){
 				start[0].classList.add("hide")
 				canvs.classList.remove("hide")
+				window.requestAnimationFrame(update);
 			}
 		})
 	</script>
