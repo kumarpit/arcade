@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
-html{
+/* html{
 	cursor: url(../images/icon_cursor_default.png), default !important;
-}
+} */
 
 .body{
 	margin: 0;
