@@ -27,17 +27,21 @@ class Snake{
 	}
 	moveSnake(){
 		let len = this.body.length;
+		let headx = this.body[len-1].x + this.dir.x;
+		let heady = this.body[len-1].y + this.dir.y;
 		if(len == 1){
-			this.body[0].x += this.dir.x;
-			this.body[0].y += this.dir.y;
+			if(!this.dead({x: headx, y: heady})){
+				this.body[0].x += this.dir.x;
+				this.body[0].y += this.dir.y;
+			}
 		}else{
 			let newx = this.body[len-1].x + this.dir.x;
 			let newy = this.body[len-1].y + this.dir.y;
-			this.body.push({x: newx, y:newy});
-			this.body.shift();
+			if(!this.dead({x: newx, y: newy})){
+				this.body.push({x: newx, y:newy});
+				this.body.shift();
+			}
 		}
-
-		console.log(this.body[len-1])
 	}
 	eatsFood(foodPos){ //this function is broken
 		let len = this.body.length;
@@ -57,16 +61,33 @@ class Snake{
 		let y = this.body[0].y - this.dir.y;
 		this.body.unshift({x: x, y: y});
 	}
-	dead(){
-		//dead conditions
+	dead(head){
+		if(head.x > canv.width - scl || head.x < 0 || head.y > canv.height - scl || head.y < 0 || this.runIntoSelf(head)){
+			return true;
+		}
+		return false;
+	}
+	runIntoSelf(head){
+		for(let i = 0; i < this.body.length - 1; i++){
+			if(head.x == this.body[i].x && head.y == this.body[i].y){
+				return true;
+			}
+		}
+		return false;
 	}
 }
 
 function createFood(){
-	let x = Math.random() * (canv.width / scl)  | 0;
-	let y = Math.random() * (canv.height / scl) | 0;
-	food = {x: x, y: y}
-	console.log(food.x * scl, food.y * scl);
+	let x, y;
+	do{
+		x = Math.random() * (canv.width / scl)  | 0;
+		y = Math.random() * (canv.height / scl) | 0;
+	}while(snake.body.forEach(el => {
+		if(x == el.x && y == el.y){
+			return true;
+		}
+	}));
+	food = {x: x, y: y};
 }
 
 function drawFood(){
@@ -89,13 +110,13 @@ function update(time){
 
 	if(countTime > interval){
 		ctx.clearRect(0, 0, canv.width, canv.height);
+		snake.eatsFood(food);
 		snake.moveSnake();
 		snake.drawSnake();
 		drawFood();
-		snake.eatsFood(food)
+
 		countTime = 0;
 	}
-
 	requestAnimationFrame(update)
 }
 
