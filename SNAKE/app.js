@@ -38,12 +38,12 @@ class Snake{
 			let newx = this.body[len-1].x + this.dir.x;
 			let newy = this.body[len-1].y + this.dir.y;
 			if(!this.dead({x: newx, y: newy})){
-				this.body.push({x: newx, y:newy});
+				this.body.push({x: newx, y: newy});
 				this.body.shift();
 			}
 		}
 	}
-	eatsFood(foodPos){ //this function is broken
+	eatsFood(foodPos){
 		let len = this.body.length;
 		let x = this.body[len-1].x + this.dir.x;
 		let y = this.body[len-1].y + this.dir.y;
@@ -57,8 +57,8 @@ class Snake{
 		return false;
 	}
 	grow(){
-		let x = this.body[0].x - this.dir.x;
-		let y = this.body[0].y - this.dir.y;
+		let x = this.body[0].x;
+		let y = this.body[0].y;
 		this.body.unshift({x: x, y: y});
 	}
 	dead(head){
@@ -124,6 +124,7 @@ function update(time){
 let snake = new Snake(0, 0);
 createFood();
 
+//desktops
 document.addEventListener("keydown", e =>{
 	switch(e.keyCode){
 		case 37:
@@ -140,5 +141,52 @@ document.addEventListener("keydown", e =>{
 			break;
 	};
 });
+
+//mobile
+document.addEventListener('touchstart', handleTouchStart, false);        
+document.addEventListener('touchmove', handleTouchMove, false);
+
+var xDown = null;                                                        
+var yDown = null;                                                        
+
+function getTouches(evt) {
+	return evt.touches
+}
+
+function handleTouchStart(evt) {  
+	const firstTouch = getTouches(evt)[0];                                       
+    xDown = firstTouch.clientX;                                      
+    yDown = firstTouch.clientY;                                      
+};                                                
+
+function handleTouchMove(evt) {
+    if ( ! xDown || ! yDown ) {
+        return;
+    }
+
+    var xUp = evt.touches[0].clientX;                                    
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+        if ( xDiff > 0 ) {
+            snake.setDir(-scl, 0)
+        } else {
+            snake.setDir(scl, 0)
+        }                       
+    } else {
+        if ( yDiff > 0 ) {
+            snake.setDir(0, -scl)
+        } else { 
+            snake.setDir(0, scl)
+        }                                                                 
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;                                             
+};
+
 
 window.requestAnimationFrame(update);

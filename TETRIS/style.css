@@ -7,10 +7,6 @@ section.game{
 	height: 100vh;
 }
 
-html{
-	cursor: url(../images/icon_cursor_default.png), default !important;
-}
-
 body{
 	margin: 0;
 	/* background-color: #5300ff; */

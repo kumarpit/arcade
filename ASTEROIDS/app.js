@@ -252,7 +252,8 @@ function update(time){
 		countTime = 0
 		let blinkOn = ship.blinkNum % 2 === 0
 		//draw space/bg
-		ctx.fillStyle = bg; //everytime we update, we drawing new canvas over the old one hence no need to erase stuff drawn previously
+		// ctx.fillStyle = "rgba(0, 0, 0, 0.65)"; //everytime we update, we drawing new canvas over the old one hence no need to erase stuff drawn previously
+		ctx.fillStyle = bg;
 		ctx.fillRect(0, 0, canv.width, canv.height);
 
 		//draw ship (TRIANGULAR)
