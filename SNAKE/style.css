@@ -1,0 +1,9 @@
+.container{
+	display: flex;
+	justify-content: center;
+}
+
+#gameCanvas{
+	border: 10px solid black;
+}
+

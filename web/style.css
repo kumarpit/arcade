@@ -2,7 +2,7 @@ body{
 	margin: 0;
 	font-family: "Press Start 2P";
 	/*background: url(https://wallpapercave.com/wp/wp742784.png);*/
-	background-color: darkblue; 
+	background-color: #3968cb; 
 	font-style: italic;
 	color: #fff;
 	no-repeat 50% 50%;
@@ -49,6 +49,10 @@ body{
 	from { background-position: 0px 0px; }
 	to { background-position: -20px 0px; }
 }*/
+
+html{
+	cursor: url(../images/icon_cursor_default.png), default !important;
+}
 
 
 .divider{

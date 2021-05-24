@@ -7,6 +7,10 @@ section.game{
 	height: 100vh;
 }
 
+html{
+	cursor: url(../images/icon_cursor_default.png), default !important;
+}
+
 body{
 	margin: 0;
 	/* background-color: #5300ff; */
@@ -80,3 +84,49 @@ p{
 	font-size: 1.5em;
 }
 
+@media only screen and (max-width: 1200px) {
+	.container{
+		display: flex;
+		padding: 2em;
+		justify-content: space-around;
+		border: 5px solid black;
+		background-color: whitesmoke;
+		width: 55%;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.container{
+		display: flex;
+		padding: 2em;
+		justify-content: space-around;
+		border: 5px solid black;
+		background-color: whitesmoke;
+		height: 80%;
+		width: 85%;
+	}
+
+	.scores{
+		font-size: 1.3em;
+	}
+
+	.right-canvas{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 900px;
+	}
+
+	#gameCanvas{
+		height: 900px;
+		width: 500px;
+	}
+
+	section.game{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 90vh;
+	}
+
+}

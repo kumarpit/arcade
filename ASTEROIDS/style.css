@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
+html{
+	cursor: url(../images/icon_cursor_default.png), default !important;
+}
+
 .body{
 	margin: 0;
 }
+
 .main{
 	display: flex;
 	justify-content: center;
@@ -27,6 +32,7 @@ h1{
 h2{
 	font-family: "Press Start 2P";
 	font-size: 0.9em;
+	font-weight: 100;
 	animation: animate 1.5s linear infinite;
 }
 
