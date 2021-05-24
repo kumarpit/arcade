@@ -94,7 +94,7 @@ function drawNextPiece(matrix, offset){
 
 
 function draw(){
-	ctx.fillStyle = "white"
+	ctx.fillStyle = "rgba(255, 255, 255, 0.5)"
 	ctx.fillRect(0, 0, canv.width, canv.height)
 	drawMatrix(player.matrix, player.pos)
 	drawMatrix(arena, {x:0, y:0})
