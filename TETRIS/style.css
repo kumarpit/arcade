@@ -10,7 +10,8 @@ section.game{
 body{
 	margin: 0;
 	/* background-color: #5300ff; */
-	background-color: blue;
+	/* background-color: blue; */
+	background-color: #f2f2f2;
 }
 
 .container{
@@ -18,7 +19,7 @@ body{
 	padding: 1em;
 	justify-content: space-around;
 	border: 5px solid black;
-	background-color: whitesmoke;
+	background-color: white;
 	width: 45%;
 	/* box-shadow: 3px 3px 10px black; */
 }
