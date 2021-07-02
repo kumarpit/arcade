@@ -41,5 +41,38 @@
     width: 80px;
     height: 40px;
     display: flex;
-    background-color: orange;    
+    background-color: orange; 
+    margin: 5px;   
+}
+
+.submarine-container {
+    width: 120px;
+    height: 40px;
+    display: flex;
+    background-color: cyan; 
+    margin: 5px;   
+}
+
+.cruiser-container {
+    width: 120px;
+    height: 40px;
+    display: flex;
+    background-color: red;  
+    margin: 5px;  
+}
+
+.battleship-container {
+    width: 160px;
+    height: 40px;
+    display: flex;
+    background-color: pink;   
+    margin: 5px; 
+}
+
+.carrier-container {
+    width: 200px;
+    height: 40px;
+    display: flex;
+    background-color: violet;  
+    margin: 5px;  
 }
