@@ -3,6 +3,10 @@ const SNAKE_COLOR = '#FFFFFF'
 const FOOD_COLOR = '#FF1133'
 const FPS = 15
 
+const socket = io('http://localhost:5500')
+
+socket.on('init',  handleInit)
+
 const canvas = document.getElementById('gameCanvas')
 const ctx = canvas.getContext('2d')
 
@@ -79,3 +83,7 @@ init()
 draw()
 
 window.requestAnimationFrame(draw)
+
+function handleInit(msg){
+    console.log(msg)
+}
