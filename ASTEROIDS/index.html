@@ -11,7 +11,7 @@
 	<div class="main">
 		<div class="text">
 			<h1>ASTEROIDS</h1>
-			<h2>Press SPACE TO START</h2>
+			<h2>Press ENTER to start</h2>
 		</div>
 		<div class="canvas-wrapper">
 			<canvas id="gameCanvas" class="hide" width="1280" height="550"></canvas> 
@@ -24,7 +24,7 @@
 		const start = document.getElementsByClassName("text");
 		const canvs = document.getElementById("gameCanvas")
 		window.addEventListener("keydown", e => {
-			if(e.keyCode == 32){
+			if(e.keyCode == 13){
 				start[0].classList.add("hide")
 				canvs.classList.remove("hide")
 				window.requestAnimationFrame(update);
