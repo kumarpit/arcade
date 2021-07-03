@@ -1,5 +1,11 @@
+body{
+    background-color: whitesmoke;
+}
+
 .container { 
     display: flex;
+    justify-content: space-between;
+    width: 850px;
 }
 
 .grid-user { 
@@ -7,13 +13,13 @@
     height: 400px;
     display: flex;
     flex-wrap: wrap;
-    background-color: blue;
-    margin: 20px;
+    background-color: #f2f2f2;
 }
 
 .grid > div { 
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
+    outline: black solid 1px;
 }
 
 .grid-computer {
@@ -21,15 +27,14 @@
     height: 400px;
     display: flex;
     flex-wrap: wrap;
-    background-color: lightgreen;
-    margin: 20px;
+    background-color: #f2f2f2;
 }
 
 .grid-display {
     width: 400px;
     height: 400px;
-    margin: 20px;
-    background-color: yellow;
+    background-color: #f2f2f2;
+    outline: black solid 1px;
 }
 
 .ship > div {
@@ -41,38 +46,58 @@
     width: 80px;
     height: 40px;
     display: flex;
-    background-color: orange; 
-    margin: 5px;   
+    background-color: black; 
+    margin: 5px 0px;   
 }
 
 .submarine-container {
     width: 120px;
     height: 40px;
     display: flex;
-    background-color: cyan; 
-    margin: 5px;   
+    background-color: black; 
+    margin: 5px 0px;     
 }
 
 .cruiser-container {
     width: 120px;
     height: 40px;
     display: flex;
-    background-color: red;  
-    margin: 5px;  
+    background-color: black;  
+    margin: 5px 0px;   
 }
 
 .battleship-container {
     width: 160px;
     height: 40px;
     display: flex;
-    background-color: pink;   
-    margin: 5px; 
+    background-color: black;   
+    margin: 5px 0px;  
 }
 
 .carrier-container {
     width: 200px;
     height: 40px;
     display: flex;
-    background-color: violet;  
-    margin: 5px;  
+    background-color: black;  
+    margin: 5px 0px;  
+}
+
+button{
+    background-color: #f2f2f2;
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 0.3em 0.5em;
+    font-style: italic;
+    box-shadow: 2px 2px black;
+    margin: 10px 0;
+}
+
+button:hover{
+    box-shadow: none;
+    transform: translate(2px, 2px);
+    cursor: pointer;
+}
+
+h3{
+    font-family: arial;
 }
