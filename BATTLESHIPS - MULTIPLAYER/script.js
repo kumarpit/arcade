@@ -78,15 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if(dir == 0) jumps = 1
         if(dir == 1) jumps = 10
 
-        console.log(ship.orientation[0].length)
         let startPos = Math.abs(Math.floor(Math.random() * compSquares.length - ship.orientation[0].length * jumps))
 
-        console.log(startPos)
         const isTaken = currentDir.some(index => compSquares[startPos + index].classList.contains('taken'))
-        const rightEdge = currentDir.some(index => (startPos + index) % dim === dim - 1)
-        const leftEdge = currentDir.some(index => (startPos + index) % dim === 0)
-
-        if(!isTaken && !rightEdge && !leftEdge) currentDir.forEach(index => {
+        const beyondEdge = (startPos % dim) > (startPos + ((ship.orientation[0].length - 1) * jumps)) % dim
+        
+        if(!isTaken && !beyondEdge) currentDir.forEach(index => {
             compSquares[startPos + index].classList.add('taken', ship.name)
             return
         })
