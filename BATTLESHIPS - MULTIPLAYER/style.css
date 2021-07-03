@@ -93,11 +93,18 @@ button{
 }
 
 button:hover{
+    cursor: pointer;
+}
+
+button:active{
     box-shadow: none;
     transform: translate(2px, 2px);
-    cursor: pointer;
 }
 
 h3{
     font-family: arial;
+}
+
+.destroyer, .submarine, .battleship, .carrier, .cruiser{
+    background-color: black;
 }

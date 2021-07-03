@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const shipSpecs = [
         {
             name: 'destroyer',
-            orientations: [
-                [0, 1]
+            orientation: [
+                [0, 1],
                 [0, dim]
             ]
         },
@@ -71,12 +71,32 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
 
     //draw ships in random positions
-    function generateShips(ship){
+    function generateShip(ship){
         let dir = Math.floor(Math.random() * ship.orientation.length) 
         let currentDir = ship.orientation[dir]
 
         if(dir == 0) jumps = 1
         if(dir == 1) jumps = 10
 
+        console.log(ship.orientation[0].length)
+        let startPos = Math.abs(Math.floor(Math.random() * compSquares.length - ship.orientation[0].length * jumps))
+
+        console.log(startPos)
+        const isTaken = currentDir.some(index => compSquares[startPos + index].classList.contains('taken'))
+        const rightEdge = currentDir.some(index => (startPos + index) % dim === dim - 1)
+        const leftEdge = currentDir.some(index => (startPos + index) % dim === 0)
+
+        if(!isTaken && !rightEdge && !leftEdge) currentDir.forEach(index => {
+            compSquares[startPos + index].classList.add('taken', ship.name)
+            return
+        })
+
+        else{
+            generateShip(ship)
+        }
+    }
+
+    for(ship of shipSpecs){
+        generateShip(ship)
     }
 })
