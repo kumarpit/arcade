@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const battleship = document.querySelector('.battleship-container')
     const carrier = document.querySelector('.carrier-container')
     const startButton = document.querySelector('#start')
-    const rotateButton = document.querySelector('#rotate')
     const turnDisplay = document.querySelector('#turn-name')
     const infoDisplay = document.querySelector('#info')
 
@@ -96,4 +95,26 @@ document.addEventListener('DOMContentLoaded', () => {
     for(ship of shipSpecs){
         generateShip(ship)
     }
+
+    destroyer.onclick = () => {
+        destroyer.classList.toggle('destroyer-container-vertical')
+    }
+
+    submarine.onclick = () => {
+        submarine.classList.toggle('submarine-container-vertical')
+    }
+
+    cruiser.onclick = () => {
+        cruiser.classList.toggle('cruiser-container-vertical')
+    }
+
+    battleship.onclick = () => {
+        battleship.classList.toggle('battleship-container-vertical')
+    }
+
+    carrier.onclick = () => {
+        carrier.classList.toggle('carrier-container-vertical')
+    }
+
+    //drag and drop to user grid
 })
