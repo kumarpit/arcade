@@ -117,4 +117,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //drag and drop to user grid
+    ships.forEach(ship => ship.addEventListener('dragstart', dragStart))
+    userSquares.forEach(square => {
+        square.addEventListener('dragstart', dragStart)
+        square.addEventListener('dragover', dragOver)
+        square.addEventListener('dragenter', dragEnter)
+        square.addEventListener('dragleave', dragLeave)
+        square.addEventListener('drop', dragDrop)
+        square.addEventListener('dragend', dragEnd)
+    })
+
+    let selectedShipNameWithIndex
+    let draggedShip
+    let draggedShipLength
+
+    ships.forEach(ship => {
+        ship.addEventListener('mousedown', (e) => {
+            selectedShipNameWithIndex = e.target.id
+            console.log(selectedShipNameWithIndex)
+        })
+    })
+
+    function dragStart(){ //don't need to pass event, can use 'this' instead
+        draggedShip = this
+        draggedShipLength = draggedShip.children.length
+        console.log(draggedShip, draggedShipLength)
+    }
+
+    function dragOver(e){
+        e.preventDefault()
+    }
+
+    function dragEnter(e){
+        e.preventDefault()
+    }
+
+    function dragLeave(){
+        //dont really need this
+    }
+
+    //main function
+    function dragDrop(){
+
+    }
+
+    function dragEnd(){
+
+    }
+
 })
