@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function dragStart(){ //don't need to pass event, can use 'this' instead
         draggedShip = this
-        draggedShipLength = draggedShip.children.length
+        draggedShipLength = this.children.length
         console.log(draggedShip, draggedShipLength)
     }
 
@@ -158,7 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //main function
     function dragDrop(){
-
+        let shipNameWithLastId = draggedShip.children[0].id
+        let shipClass = shipNameWithLastId.slice(0, -2)
+        console.log(shipClass)
     }
 
     function dragEnd(){
