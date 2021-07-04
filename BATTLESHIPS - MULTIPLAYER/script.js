@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const beyondEdge = (startPos % dim) > (startPos + ((ship.orientation[0].length - 1) * jumps)) % dim
         
         if(!isTaken && !beyondEdge) currentShip.forEach(index => {
-            compSquares[startPos + index].classList.add('taken', ship.name)
+            compSquares[startPos + index].classList.add('hide', 'taken', ship.name)
             return
         })
 
@@ -231,19 +231,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if(isGameOver) return
 
         if(currentPlayer === 'user'){
-            turnDisplay.innerHTML = 'Your Turn'
+            turnDisplay.innerHTML = ''
             compSquares.forEach(square => square.addEventListener('click', e => {
                 userFire(square)
             }))
         }else{
-            turnDisplay.innerHTML = 'Computer'
+            turnDisplay.innerHTML = ''
             computerFire()
         }
     }
 
     function userFire(sqr){
         if(sqr.classList.contains('taken')){
-            compShipHits[shipIndex.indexOf(sqr.classList[1])]++
+            compShipHits[shipIndex.indexOf(sqr.classList[2])]++
             sqr.classList.add('boom')
             console.log(compShipHits)
 

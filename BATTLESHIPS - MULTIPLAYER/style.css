@@ -130,7 +130,7 @@ button{
     padding: 0.3em 0.5em;
     font-style: italic;
     box-shadow: 2px 2px black;
-    margin: 10px 0;
+    margin: 2em 0;
 }
 
 button:hover{
@@ -148,4 +148,8 @@ h3{
 
 .destroyer, .submarine, .battleship, .carrier, .cruiser{
     background-color: black;
+}
+
+.hide{
+    background-color: transparent;
 }
