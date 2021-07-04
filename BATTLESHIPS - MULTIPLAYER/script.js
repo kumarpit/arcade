@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         square.addEventListener('dragstart', dragStart)
         square.addEventListener('dragover', dragOver)
         square.addEventListener('dragenter', dragEnter)
-        square.addEventListener('dragleave', dragLeave)
+        // square.addEventListener('dragleave', dragLeave)
         square.addEventListener('drop', dragDrop)
         square.addEventListener('dragend', dragEnd)
     })
@@ -134,14 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ships.forEach(ship => {
         ship.addEventListener('mousedown', (e) => {
             selectedShipNameWithIndex = e.target.id
-            console.log(selectedShipNameWithIndex)
         })
     })
 
     function dragStart(){ //don't need to pass event, can use 'this' instead
         draggedShip = this
         draggedShipLength = this.children.length
-        console.log(draggedShip, draggedShipLength)
     }
 
     function dragOver(e){
@@ -152,15 +150,28 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
     }
 
-    function dragLeave(){
-        //dont really need this
-    }
-
-    //main function
-    function dragDrop(){
-        let shipNameWithLastId = draggedShip.children[0].id
+    function dragDrop(e){
+        let lastIndex = draggedShipLength - 1
+        let shipNameWithLastId = draggedShip.children[lastIndex].id
         let shipClass = shipNameWithLastId.slice(0, -2)
-        console.log(shipClass)
+        let selectedIndex = parseInt(selectedShipNameWithIndex.substr(-1))
+        let dropIndex = parseInt(e.target.dataset.id)
+        
+        let cellsToLast = lastIndex - selectedIndex
+
+        if(!draggedShip.classList.contains(`${shipClass}-container-vertical`)){ //horizontal
+            if((dropIndex + cellsToLast) % 10 < dropIndex % 10){
+                return
+            }else{
+                let startIndex = dropIndex - selectedIndex
+                for(let i = startIndex; i < startIndex + draggedShipLength; i++){
+                    userSquares[i].classList.add(shipClass)
+                }
+                //remove ship from display grid
+            }
+        }else{ //vertical
+            console.log('this ship is vertical')
+        }
     }
 
     function dragEnd(){
