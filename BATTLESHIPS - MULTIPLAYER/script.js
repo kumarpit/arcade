@@ -158,24 +158,34 @@ document.addEventListener('DOMContentLoaded', () => {
         let dropIndex = parseInt(e.target.dataset.id)
         
         let cellsToLast = lastIndex - selectedIndex
+        let cellsToFirst = selectedIndex
 
         if(!draggedShip.classList.contains(`${shipClass}-container-vertical`)){ //horizontal
-            if((dropIndex + cellsToLast) % 10 < dropIndex % 10){
+            if((dropIndex + cellsToLast)  % 10 < dropIndex % 10 || //checking right and left edge
+               (dropIndex - cellsToFirst) % 10 > dropIndex % 10){
                 return
             }else{
                 let startIndex = dropIndex - selectedIndex
                 for(let i = startIndex; i < startIndex + draggedShipLength; i++){
                     userSquares[i].classList.add(shipClass)
                 }
-                //remove ship from display grid
+               deleteShipFromDisplay(shipClass)
             }
         }else{ //vertical
+            
             console.log('this ship is vertical')
         }
     }
 
     function dragEnd(){
 
+    }
+
+    function deleteShipFromDisplay(shipClass){
+        let toDelete = displayGrid.getElementsByClassName(`${shipClass}-container`)
+        while(toDelete.length > 0){
+            toDelete[0].parentNode.removeChild(toDelete[0])
+        }
     }
 
 })
