@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function dragEnd(){
-
+        //!!!
     }
 
     function deleteShipFromDisplay(shipClass){
@@ -220,4 +220,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return false
     }
 
+    startButton.onclick = () => {
+        if(displayGrid.children.length == 0){
+            console.log('game started')
+        }else{
+            console.log('place all your ships')
+        }
+    }
 })
