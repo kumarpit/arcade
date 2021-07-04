@@ -218,17 +218,34 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.onclick = () => {
         if(displayGrid.children.length == 0){
             console.log('game started')
-            // startGame()
+            startGame()
         }else{
             console.log('place all your ships')
         }
     }
 
-    // function startGame(){
-    //     while(userShipsAlive && compShipsAlive){
-    //         do{
-    //             //play game, alternate
-    //         }
-    //     }
-    // }
+    let userShipsAlive = true
+    let compShipsAlive = true
+
+    //game loop
+    function startGame(){
+        let userShips = document.querySelector('.grid-user').querySelectorAll('.taken')
+        let compShips = document.querySelector('.grid-computer').querySelectorAll('.taken')
+        computerFire()
+    }
+
+    function computerFire(){
+        let firePos = Math.floor(Math.random() * 100)
+        console.log(firePos)
+        console.log(userSquares[firePos].classList)
+        if(userSquares[firePos].classList.contains('boom') || userSquares[firePos].classList.contains('miss')){
+            computerFire()
+        }else{
+            if(userSquares[firePos].classList.contains('taken')){
+                userSquares[firePos].classList.add('boom')
+            }else{
+                userSquares[firePos].classList.add('miss')
+            }
+        }
+    }
 })
