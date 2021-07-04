@@ -33,7 +33,6 @@ body{
 .grid-display {
     width: 240px;
     background-color: #f2f2f2;
-    outline: black solid 1px;
 }
 
 .ship > div {

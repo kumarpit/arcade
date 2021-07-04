@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.querySelector('#start')
     const turnDisplay = document.querySelector('#turn-name')
     const infoDisplay = document.querySelector('#info')
-
     const dim = 10
-
     const userSquares = []
     const compSquares = []
 
@@ -168,9 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }else{
                 let startIndex = dropIndex - cellsToFirst
                 for(let i = startIndex; i < startIndex + draggedShipLength; i++){
-                    userSquares[i].classList.add(shipClass, 'taken')
+                    userSquares[i].classList.add('taken', shipClass)
                 }
-                deleteShipFromDisplay(shipClass)
+                displayGrid.removeChild(draggedShip)
             }
         }else{ //vertical
             if(dropIndex + (cellsToLast * dim) > 99  || //beyond bottom edge
@@ -180,22 +178,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }else{
                 let startIndex = dropIndex - cellsToFirst
                 for(let i = startIndex; i < startIndex + (draggedShipLength * dim); i += dim){
-                    userSquares[i].classList.add(shipClass, 'taken')
+                    userSquares[i].classList.add('taken', shipClass)
                 }
-                deleteShipFromDisplay(shipClass)
+                displayGrid.removeChild(draggedShip)
             }
         }
     }
 
     function dragEnd(){
         //!!!
-    }
-
-    function deleteShipFromDisplay(shipClass){
-        let toDelete = displayGrid.getElementsByClassName(`${shipClass}-container`)
-        while(toDelete.length > 0){
-            toDelete[0].parentNode.removeChild(toDelete[0])
-        }
     }
 
     function taken(start, len, isHorizontal){
@@ -217,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startButton.onclick = () => {
         if(displayGrid.children.length == 0){
-            console.log('game started')
             startGame()
         }else{
             console.log('place all your ships')
@@ -226,11 +216,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let userShipsAlive = true
     let compShipsAlive = true
+    let isGameOver = false
+    let currentPlayer = 'user'
+    let userShipHits = [0, 0, 0, 0, 0]
+    let compShipHits = [0, 0, 0, 0, 0]
+    let shipsDeadCount = [2, 3, 3, 4, 5]
+    let shipIndex = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier']
 
     //game loop
     function startGame(){
         let userShips = document.querySelector('.grid-user').querySelectorAll('.taken')
         let compShips = document.querySelector('.grid-computer').querySelectorAll('.taken')
+
+        if(isGameOver) return
+
+        if(currentPlayer === 'user'){
+            turnDisplay.innerHTML = 'Your Turn'
+            compSquares.forEach(square => square.addEventListener('click', e => {
+                userFire(square)
+            }))
+        }else{
+            turnDisplay.innerHTML = 'Computer'
+            computerFire()
+        }
+    }
+
+    function userFire(sqr){
+        if(sqr.classList.contains('taken')){
+            compShipHits[shipIndex.indexOf(sqr.classList[1])]++
+            sqr.classList.add('boom')
+            console.log(compShipHits)
+
+            if(compShipHits.every((val, index) => val === shipsDeadCount[index])){
+                console.log('computer ships dead')
+            }
+        }else{
+            sqr.classList.add('miss')
+        }
+
         computerFire()
     }
 
@@ -242,7 +265,13 @@ document.addEventListener('DOMContentLoaded', () => {
             computerFire()
         }else{
             if(userSquares[firePos].classList.contains('taken')){
+                userShipHits[shipIndex.indexOf(userSquares[firePos].classList[1])]++
                 userSquares[firePos].classList.add('boom')
+                console.log(userShipHits)
+
+                if(userShipHits.every((val, index) => val === shipsDeadCount[index])){
+                    console.log('your ships dead')
+                }
             }else{
                 userSquares[firePos].classList.add('miss')
             }
