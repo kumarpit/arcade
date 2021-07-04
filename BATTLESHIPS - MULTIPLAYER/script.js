@@ -161,19 +161,34 @@ document.addEventListener('DOMContentLoaded', () => {
         let cellsToFirst = selectedIndex
 
         if(!draggedShip.classList.contains(`${shipClass}-container-vertical`)){ //horizontal
+            console.log(dropIndex, selectedIndex)
             if((dropIndex + cellsToLast)  % 10 < dropIndex % 10 || //checking right and left edge
-               (dropIndex - cellsToFirst) % 10 > dropIndex % 10){
+               (dropIndex - cellsToFirst) % 10 > dropIndex % 10 ||
+               (taken(dropIndex - cellsToFirst, draggedShipLength, true))){
                 return
             }else{
-                let startIndex = dropIndex - selectedIndex
+                let startIndex = dropIndex - cellsToFirst
                 for(let i = startIndex; i < startIndex + draggedShipLength; i++){
-                    userSquares[i].classList.add(shipClass)
+                    userSquares[i].classList.add(shipClass, 'taken')
                 }
-               deleteShipFromDisplay(shipClass)
+                deleteShipFromDisplay(shipClass)
             }
         }else{ //vertical
-            
-            console.log('this ship is vertical')
+            let cellsToLast = lastIndex - selectedIndex
+            let cellsToFirst = selectedIndex
+
+            if(dropIndex + (cellsToLast * dim) > 99  || //beyond bottom edge
+              (dropIndex - (cellsToFirst * dim) < 0) || //beyond top edge
+              (taken(dropIndex - cellsToFirst, draggedShipLength * dim, false))){
+                  return
+            }else{
+                let startIndex = dropIndex - cellsToFirst
+                for(let i = startIndex; i < startIndex + (draggedShipLength * dim); i += dim){
+                    userSquares[i].classList.add(shipClass, 'taken')
+                }
+                deleteShipFromDisplay(shipClass)
+            }
+            // console.log('this ship is vertical')
         }
     }
 
@@ -186,6 +201,23 @@ document.addEventListener('DOMContentLoaded', () => {
         while(toDelete.length > 0){
             toDelete[0].parentNode.removeChild(toDelete[0])
         }
+    }
+
+    function taken(start, len, isHorizontal){
+        if(isHorizontal){
+            for(let i = start; i < start + len; i++){
+                if(userSquares[i].classList.contains('taken')){
+                    return true
+                }
+            }
+        }else{
+            for(let i = start; i < start + len; i += dim){
+                if(userSquares[i].classList.contains('taken')){
+                    return true
+                }
+            }
+        }
+        return false
     }
 
 })
