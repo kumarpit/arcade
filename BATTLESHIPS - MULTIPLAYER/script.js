@@ -72,17 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
     //draw ships in random positions
     function generateShip(ship){
         let dir = Math.floor(Math.random() * ship.orientation.length) 
-        let currentDir = ship.orientation[dir]
+        let currentShip = ship.orientation[dir]
 
         if(dir == 0) jumps = 1
         if(dir == 1) jumps = 10
 
-        let startPos = Math.abs(Math.floor(Math.random() * compSquares.length - ship.orientation[0].length * jumps))
+        let startPos = Math.abs(Math.floor(Math.random() * compSquares.length - ship.orientation[0].length * jumps)) //always less than 99-ship length
 
-        const isTaken = currentDir.some(index => compSquares[startPos + index].classList.contains('taken'))
+        const isTaken = currentShip.some(index => compSquares[startPos + index].classList.contains('taken'))
         const beyondEdge = (startPos % dim) > (startPos + ((ship.orientation[0].length - 1) * jumps)) % dim
         
-        if(!isTaken && !beyondEdge) currentDir.forEach(index => {
+        if(!isTaken && !beyondEdge) currentShip.forEach(index => {
             compSquares[startPos + index].classList.add('taken', ship.name)
             return
         })
@@ -161,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let cellsToFirst = selectedIndex
 
         if(!draggedShip.classList.contains(`${shipClass}-container-vertical`)){ //horizontal
-            console.log(dropIndex, selectedIndex)
             if((dropIndex + cellsToLast)  % 10 < dropIndex % 10 || //checking right and left edge
                (dropIndex - cellsToFirst) % 10 > dropIndex % 10 ||
                (taken(dropIndex - cellsToFirst, draggedShipLength, true))){
@@ -188,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 deleteShipFromDisplay(shipClass)
             }
-            // console.log('this ship is vertical')
         }
     }
 
@@ -223,8 +221,17 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.onclick = () => {
         if(displayGrid.children.length == 0){
             console.log('game started')
+            // startGame()
         }else{
             console.log('place all your ships')
         }
     }
+
+    // function startGame(){
+    //     while(userShipsAlive && compShipsAlive){
+    //         do{
+    //             //play game, alternate
+    //         }
+    //     }
+    // }
 })
