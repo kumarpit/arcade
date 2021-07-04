@@ -173,9 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 deleteShipFromDisplay(shipClass)
             }
         }else{ //vertical
-            let cellsToLast = lastIndex - selectedIndex
-            let cellsToFirst = selectedIndex
-
             if(dropIndex + (cellsToLast * dim) > 99  || //beyond bottom edge
               (dropIndex - (cellsToFirst * dim) < 0) || //beyond top edge
               (taken(dropIndex - cellsToFirst, draggedShipLength * dim, false))){
