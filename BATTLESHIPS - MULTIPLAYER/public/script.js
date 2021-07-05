@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const infoDisplay = document.querySelector('#info')
     const singlePlayerButton = document.querySelector('#single-player')
     const multiPlayerButton = document.querySelector('#multi-player')
+    const playersStatus = document.querySelector('.players-status')
     const dim = 10
     const userSquares = []
     const compSquares = []
@@ -66,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startMultiPlayer(){
         console.log('this is the multi-player logic')
+        playersStatus.style.display = 'flex'
+        startButton.style.display = 'block'
     }
 
     //ship positions

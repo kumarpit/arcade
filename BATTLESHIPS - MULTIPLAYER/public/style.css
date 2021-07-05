@@ -8,8 +8,8 @@ body{
     width: 850px;
 }
 
-.status {
-    display: flex;
+.players-status {
+    display: none;
 }
 
 .player-1, .player-2{
