@@ -15,7 +15,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const userSquares = []
     const compSquares = []
 
+    //multiplayer additions
+    let gameMode = ''
+    let playerNum = 0
+    let ready = false
+    let enemyReady = false
+    let allShipPlaced = false
+    let shotFired = -1
+
     const socket = io()
+
+    //get player number
+    socket.on('player-number', num => {
+        if(num === -1){
+            infoDisplay.innerHTML= 'ROOM FULL'
+        }else{
+            playerNum = parseInt(num)
+            if(playerNum === 1) currentPlayer = 'enemy'
+
+            console.log(playerNum)
+        }
+    })
+
+    
 
     //create boards
     function createBoard(grid, arr){

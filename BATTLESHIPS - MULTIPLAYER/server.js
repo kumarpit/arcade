@@ -33,12 +33,12 @@ io.on('connection', socket => {
         }
     }
 
-    //ignore extra players
-    if(playerIndex === -1) return
-
     //output player number to client
     socket.emit('player-number', playerIndex) //will tell the connecting socket what player number they are
     console.log(`[PLAYER ${playerIndex} CONNECTED]`)
+ 
+    //ignore extra players
+    if(playerIndex === -1) return
  
 
 })
