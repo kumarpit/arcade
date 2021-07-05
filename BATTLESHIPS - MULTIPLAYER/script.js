@@ -208,9 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startButton.onclick = () => {
         if(displayGrid.children.length == 0){
+            infoDisplay.innerHTML = ''
             startGame()
         }else{
-            console.log('place all your ships')
+            infoDisplay.innerHTML = 'Place all your ships'
         }
     }
 
@@ -247,8 +248,14 @@ document.addEventListener('DOMContentLoaded', () => {
             sqr.classList.add('boom')
             console.log(compShipHits)
 
+            compShipHits.forEach((hits, i) => {
+                if(hits == shipsDeadCount[i]){
+                    infoDisplay.innerHTML = `computer ${shipIndex[i]} sunk`
+                }
+            })
+
             if(compShipHits.every((val, index) => val === shipsDeadCount[index])){
-                console.log('computer ships dead')
+                infoDisplay.innerHTML = 'computer ships dead'
             }
         }else{
             sqr.classList.add('miss')
@@ -270,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(userShipHits)
 
                 if(userShipHits.every((val, index) => val === shipsDeadCount[index])){
-                    console.log('your ships dead')
+                    infoDisplay.innerHTML = 'your ships dead'
                 }
             }else{
                 userSquares[firePos].classList.add('miss')
