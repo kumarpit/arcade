@@ -81,11 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
         function playerConnectedOrDisconnected(num){
             let player =  `.player-${parseInt(num) + 1}`
             document.querySelector(`${player} .connected span`).classList.toggle('green')
-
-            if(parseInt(num) === playerNum){
-                console.log('k bro')
-            }
         }
+
+        startButton.addEventListener('click', () => {
+            if(displayGrid.children.length == 0) {
+                startMultiGame(socket)
+            }else{
+                infoDisplay.innerHTML = 'Place all your ships'
+            }
+        })
     }
 
     //ship positions
@@ -278,9 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //single player game init function
     function startSingleGame(){
-        let userShips = document.querySelector('.grid-user').querySelectorAll('.taken')
-        let compShips = document.querySelector('.grid-computer').querySelectorAll('.taken')
-
         if(currentPlayer === 'user'){
             turnDisplay.innerHTML = ''
             compSquares.forEach(square => square.addEventListener('click', e => {
@@ -290,6 +291,10 @@ document.addEventListener('DOMContentLoaded', () => {
             turnDisplay.innerHTML = ''
             computerFire()
         }
+    }
+
+    function startMultiGame(socket){
+        console.log('multiplayer game mode logic...')
     }
 
     //!!!DISABLE DOUBLE CLICK
@@ -314,11 +319,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }else{
             sqr.classList.add('miss')
         }
-
         computerFire()
     }
 
     function computerFire(){
+        if(isGameOver) return
+
         let firePos = Math.floor(Math.random() * 100)
         console.log(firePos)
         console.log(userSquares[firePos].classList)
