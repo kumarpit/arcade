@@ -1,4 +1,5 @@
 # Arcade
-A website with a collection of a few classic arcade games such as Tetris, Asteroids and Snake. Play with your friends and family!
+A collection of a few classic arcade games such as Tetris, Asteroids and Snake. 
+You can play with your friends and family online.
 
 NOTE: Work in Progress...
