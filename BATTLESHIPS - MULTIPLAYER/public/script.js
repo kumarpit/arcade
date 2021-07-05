@@ -211,8 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    let userShipsAlive = true
-    let compShipsAlive = true
     let isGameOver = false
     let currentPlayer = 'user'
     let userShipHits = [0, 0, 0, 0, 0]
