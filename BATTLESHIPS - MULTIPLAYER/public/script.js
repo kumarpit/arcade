@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.querySelector('#start')
     const turnDisplay = document.querySelector('#turn-name')
     const infoDisplay = document.querySelector('#info')
+    const singlePlayerButton = document.querySelector('#single-player')
+    const multiPlayerButton = document.querySelector('#multi-player')
     const dim = 10
     const userSquares = []
     const compSquares = []
@@ -22,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let enemyReady = false
     let allShipPlaced = false
     let shotFired = -1
+
+    //select player mode
+    singlePlayerButton.addEventListener('click', startSinglePlayer)
+    multiPlayerButton.addEventListener('click', startMultiPlayer)
 
     const socket = io()
 
@@ -38,19 +44,29 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     
+    //single player function
+    function startSinglePlayer(){
+        gameMode = 'singlePlayer'
 
-    //create boards
-    function createBoard(grid, arr){
-        for(let i = 0; i < dim * dim; i++){
-            let square = document.createElement('div')
-            square.dataset.id = i
-            grid.appendChild(square)
-            arr.push(square)
+        for(ship of shipSpecs){
+            generateShip(ship)
+        }
+
+        startButton.style.display = 'block'
+
+        startButton.onclick = () => {
+            if(displayGrid.children.length == 0){
+                infoDisplay.innerHTML = ''
+                startSingleGame()
+            }else{
+                infoDisplay.innerHTML = 'Place all your ships'
+            }
         }
     }
 
-    createBoard(userGrid, userSquares)
-    createBoard(compGrid, compSquares)
+    function startMultiPlayer(){
+        console.log('this is the multi-player logic')
+    }
 
     //ship positions
     const shipSpecs = [
@@ -91,6 +107,19 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     ]
 
+    //create boards
+    function createBoard(grid, arr){
+        for(let i = 0; i < dim * dim; i++){
+            let square = document.createElement('div')
+            square.dataset.id = i
+            grid.appendChild(square)
+            arr.push(square)
+        }
+    }
+
+    createBoard(userGrid, userSquares)
+    createBoard(compGrid, compSquares)
+
     //draw ships in random positions
     function generateShip(ship){
         let dir = Math.floor(Math.random() * ship.orientation.length) 
@@ -112,10 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         else{
             generateShip(ship)
         }
-    }
-
-    for(ship of shipSpecs){
-        generateShip(ship)
     }
 
     destroyer.onclick = () => {
@@ -224,15 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return false
     }
 
-    startButton.onclick = () => {
-        if(displayGrid.children.length == 0){
-            infoDisplay.innerHTML = ''
-            startGame()
-        }else{
-            infoDisplay.innerHTML = 'Place all your ships'
-        }
-    }
-
     let isGameOver = false
     let currentPlayer = 'user'
     let userShipHits = [0, 0, 0, 0, 0]
@@ -240,12 +256,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let shipsDeadCount = [2, 3, 3, 4, 5]
     let shipIndex = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier']
 
-    //game loop
-    function startGame(){
+    //single player game init function
+    function startSingleGame(){
         let userShips = document.querySelector('.grid-user').querySelectorAll('.taken')
         let compShips = document.querySelector('.grid-computer').querySelectorAll('.taken')
-
-        if(isGameOver) return
 
         if(currentPlayer === 'user'){
             turnDisplay.innerHTML = ''
@@ -258,7 +272,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //!!!DISABLE DOUBLE CLICK
     function userFire(sqr){
+        if(isGameOver) return
+
         if(sqr.classList.contains('taken')){
             compShipHits[shipIndex.indexOf(sqr.classList[2])]++
             sqr.classList.add('boom')
@@ -272,6 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(compShipHits.every((hits, i) => hits === shipsDeadCount[i])){
                 infoDisplay.innerHTML = 'computer ships dead'
+                isGameOver  = true
             }
         }else{
             sqr.classList.add('miss')
@@ -294,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if(userShipHits.every((val, index) => val === shipsDeadCount[index])){
                     infoDisplay.innerHTML = 'your ships dead'
+                    isGameOver = true
                 }
             }else{
                 userSquares[firePos].classList.add('miss')
