@@ -29,21 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //select player mode
     singlePlayerButton.addEventListener('click', startSinglePlayer)
     multiPlayerButton.addEventListener('click', startMultiPlayer)
-
-    const socket = io()
-
-    //get player number
-    socket.on('player-number', num => {
-        if(num === -1){
-            infoDisplay.innerHTML= 'ROOM FULL'
-        }else{
-            playerNum = parseInt(num)
-            if(playerNum === 1) currentPlayer = 'enemy'
-
-            console.log(playerNum)
-        }
-    })
-
     
     //single player function
     function startSinglePlayer(){
@@ -65,10 +50,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //multiplayer function
     function startMultiPlayer(){
-        console.log('this is the multi-player logic')
         playersStatus.style.display = 'flex'
         startButton.style.display = 'block'
+        gameMode = 'multiPlayer'
+
+        const socket = io() //only want to use socket when in multiplayer
+
+        //get player number
+        socket.on('player-number', num => {
+            if(num === -1){
+                infoDisplay.innerHTML= 'ROOM FULL'
+            }else{
+                playerNum = parseInt(num)
+                if(playerNum === 1) currentPlayer = 'enemy'
+                let player = `.player-${parseInt(num) + 1}`
+                document.querySelector(`${player}`).style.fontWeight = 'bold'
+                document.querySelector(`${player} .connected span`).classList.toggle('green')
+                console.log(playerNum)
+            }
+        })
+
+        //another player has connected
+        socket.on('player-connection', num => {
+            console.log(`Player number ${num} has connected`)
+            playerConnectedOrDisconnected(num)
+        })
+
+        function playerConnectedOrDisconnected(num){
+            let player =  `.player-${parseInt(num) + 1}`
+            document.querySelector(`${player} .connected span`).classList.toggle('green')
+
+            if(parseInt(num) === playerNum){
+                console.log('k bro')
+            }
+        }
     }
 
     //ship positions

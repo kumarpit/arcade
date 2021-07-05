@@ -39,6 +39,10 @@ io.on('connection', socket => {
  
     //ignore extra players
     if(playerIndex === -1) return
- 
+
+    connections[playerIndex] = false //to keep track of player ready -> ships placed
+    
+    //tell everyone what player number connnected
+    socket.broadcast.emit('player-connection', playerIndex) //sends msg to all socket connections
 
 })

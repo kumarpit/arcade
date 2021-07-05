@@ -18,6 +18,21 @@ body{
     padding: 0 1em 1em 1em;
 }
 
+.connected, .ready {
+    font-weight: normal;
+}
+
+.connected span, .ready span{
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-color: red;
+}
+
+span.green{
+    background-color: green;
+}
+
 .grid-user { 
     width: 400px;
     height: 400px;
