@@ -70,4 +70,19 @@ io.on('connection', socket => {
         socket.emit('check-players', players)
     })
 
+    //on fire recieved
+    socket.on('fire', id => {
+        console.log(`shots fired from ${playerIndex} at squares ${id}`)
+
+        //send the move to the enemy
+        socket.broadcast.emit('fire', id)
+    })
+
+    //on fire reply - returns the square of the enemy that the player fired on
+    socket.on('fire-reply', square => {
+        console.log(square)
+        //send the reply to the other player
+        socket.broadcast.emit('fire-reply', square)
+    })
+
 })

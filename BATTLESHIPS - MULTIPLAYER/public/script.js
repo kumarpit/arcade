@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userGrid = document.querySelector('.grid-user')
-    const compGrid = document.querySelector('.grid-computer')
+    const enemyGrid = document.querySelector('.grid-computer')
     const displayGrid = document.querySelector('.grid-display')
     const ships = document.querySelectorAll('.ship')
     const destroyer = document.querySelector('.destroyer-container')
@@ -16,14 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const playersStatus = document.querySelector('.players-status')
     const dim = 10
     const userSquares = []
-    const compSquares = []
+    const enemySquares = []
 
     //multiplayer additions
     let gameMode = ''
     let playerNum = 0
     let ready = false
     let enemyReady = false
-    let allShipPlaced = false
     let shotFired = -1
 
     //select player mode
@@ -33,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //single player function
     function startSinglePlayer(){
         gameMode = 'singlePlayer'
+
+        //clear both boards 
 
         for(ship of shipSpecs){
             generateShip(ship)
@@ -96,24 +97,49 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 if(player.ready){
-                    playerReady(i)
                     if(i !== playerNum){
+                        playerReady(i)
                         enemyReady = true
                     }
                 }
             })
         })
+
         function playerConnectedOrDisconnected(num){
             let player =  `.player-${parseInt(num) + 1}`
             document.querySelector(`${player} .connected span`).classList.toggle('green')
         }
 
+        //start button click
         startButton.addEventListener('click', () => {
             if(displayGrid.children.length == 0) {
                 playMultiGame(socket)
             }else{
                 infoDisplay.innerHTML = 'Place all your ships'
             }
+        })
+
+        //setup enemy squares event listeners, shot fired
+        enemySquares.forEach(square => {
+             square.addEventListener('click', () => {
+                 if(currentPlayer === 'user' && ready && enemyReady){
+                    shotFired = square.dataset.id
+                    socket.emit('fired', shotFired)
+                 }
+             })
+        })
+
+        //on fire recieved
+        socket.on('fire', id => {
+            enemyGo(id)
+            const square = userSquares[id]
+            socket.emit('fire-reply', square)
+            playMultiGame(socket)
+        })
+
+        //on recieveing fire-reply
+        socket.on('fire-reply', classList => {
+            console.log(classList)
         })
     }
 
@@ -167,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     createBoard(userGrid, userSquares)
-    createBoard(compGrid, compSquares)
+    createBoard(enemyGrid, enemySquares)
 
     //draw ships in random positions
     function generateShip(ship){
@@ -177,13 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if(dir == 0) jumps = 1
         if(dir == 1) jumps = 10
 
-        let startPos = Math.abs(Math.floor(Math.random() * compSquares.length - ship.orientation[0].length * jumps)) //always less than 99-ship length
+        let startPos = Math.abs(Math.floor(Math.random() * enemySquares.length - ship.orientation[0].length * jumps)) //always less than 99-ship length
 
-        const isTaken = currentShip.some(index => compSquares[startPos + index].classList.contains('taken'))
+        const isTaken = currentShip.some(index => enemySquares[startPos + index].classList.contains('taken'))
         const beyondEdge = (startPos % dim) > (startPos + ((ship.orientation[0].length - 1) * jumps)) % dim
         
         if(!isTaken && !beyondEdge) currentShip.forEach(index => {
-            compSquares[startPos + index].classList.add('hide', 'taken', ship.name)
+            enemySquares[startPos + index].classList.add('hide', 'taken', ship.name)
             return
         })
 
@@ -301,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isGameOver = false
     let currentPlayer = 'user'
     let userShipHits = [0, 0, 0, 0, 0]
-    let compShipHits = [0, 0, 0, 0, 0]
+    let enemyShipHits = [0, 0, 0, 0, 0]
     let shipsDeadCount = [2, 3, 3, 4, 5]
     let shipIndex = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier']
 
@@ -309,12 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function playSingleGame(){
         if(currentPlayer === 'user'){
             turnDisplay.innerHTML = ''
-            compSquares.forEach(square => square.addEventListener('click', e => {
+            enemySquares.forEach(square => square.addEventListener('click', e => {
                 userFire(square)
             }))
         }else{
             turnDisplay.innerHTML = ''
-            computerFire()
+            enemyFire()
         }
     }
 
@@ -347,38 +373,41 @@ document.addEventListener('DOMContentLoaded', () => {
         if(isGameOver) return
 
         if(sqr.classList.contains('taken')){
-            compShipHits[shipIndex.indexOf(sqr.classList[2])]++
+            enemyShipHits[shipIndex.indexOf(sqr.classList[2])]++
             sqr.classList.add('boom')
-            console.log(compShipHits)
+            console.log(enemyShipHits)
 
-            compShipHits.forEach((hits, i) => {
+            enemyShipHits.forEach((hits, i) => {
                 if(hits === shipsDeadCount[i]){
-                    infoDisplay.innerHTML = `computer ${shipIndex[i]} sunk`
+                    infoDisplay.innerHTML = `enemy ${shipIndex[i]} sunk`
                 }
             })
 
-            if(compShipHits.every((hits, i) => hits === shipsDeadCount[i])){
-                infoDisplay.innerHTML = 'computer ships dead'
+            if(enemyShipHits.every((hits, i) => hits === shipsDeadCount[i])){
+                infoDisplay.innerHTML = 'enemy ships dead'
                 isGameOver  = true
             }
         }else{
             sqr.classList.add('miss')
         }
-        computerFire()
+        enemyFire()
     }
 
-    function computerFire(){
+    function enemyFire(square){
         if(isGameOver) return
 
-        let firePos = Math.floor(Math.random() * 100)
-        console.log(firePos)
-        console.log(userSquares[firePos].classList)
-        if(userSquares[firePos].classList.contains('boom') || userSquares[firePos].classList.contains('miss')){
-            computerFire()
+        if(gameMode === 'singlePlayer'){
+            square = Math.floor(Math.random() * 100)
+        }
+        // console.log(square)
+        // console.log(userSquares[square].classList)
+
+        if(userSquares[square].classList.contains('boom') || userSquares[square].classList.contains('miss')){
+            enemyFire()
         }else{
-            if(userSquares[firePos].classList.contains('taken')){
-                userShipHits[shipIndex.indexOf(userSquares[firePos].classList[1])]++
-                userSquares[firePos].classList.add('boom')
+            if(userSquares[square].classList.contains('taken')){
+                userShipHits[shipIndex.indexOf(userSquares[square].classList[1])]++
+                userSquares[square].classList.add('boom')
                 console.log(userShipHits)
 
                 if(userShipHits.every((val, index) => val === shipsDeadCount[index])){
@@ -386,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     isGameOver = true
                 }
             }else{
-                userSquares[firePos].classList.add('miss')
+                userSquares[square].classList.add('miss')
             }
         }
     }
