@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //on recieveing fire-reply
         socket.on('fire-reply', sqrContent => {
-            console.log(sqrContent)
             userFire(null, sqrContent)
             playMultiGame(socket)
         })
