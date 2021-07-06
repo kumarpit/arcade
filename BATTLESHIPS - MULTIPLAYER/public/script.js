@@ -134,14 +134,16 @@ document.addEventListener('DOMContentLoaded', () => {
         //on fire recieved
         socket.on('fire', id => {
             enemyFire(id)
-            const square = userSquares[id].classList
-            socket.emit('fire-reply', square)
+            const sqrContent = userSquares[id].classList
+            socket.emit('fire-reply', sqrContent)
             playMultiGame(socket)
         })
 
         //on recieveing fire-reply
-        socket.on('fire-reply', square => {
-            console.log(square)
+        socket.on('fire-reply', sqrContent => {
+            console.log(sqrContent)
+            userFire(null, sqrContent)
+            playMultiGame(socket)
         })
     }
 
@@ -371,28 +373,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //!!!DISABLE DOUBLE CLICK
-    function userFire(sqr){
+    function userFire(sqr, sqrContent){ //sqrContent is the classList of the square
         if(isGameOver) return
 
-        if(sqr.classList.contains('taken')){
-            enemyShipHits[shipIndex.indexOf(sqr.classList[2])]++
-            sqr.classList.add('boom')
-            console.log(enemyShipHits)
+        if(gameMode === 'singlePlayer'){
+            //SINGLE PLAYER FIRE LOGIC
+            if(sqr.classList.contains('taken')){
+                enemyShipHits[shipIndex.indexOf(sqr.classList[2])]++
+                sqr.classList.add('boom')
+                // console.log(enemyShipHits)
 
-            enemyShipHits.forEach((hits, i) => {
-                if(hits === shipsDeadCount[i]){
-                    infoDisplay.innerHTML = `enemy ${shipIndex[i]} sunk`
+                enemyShipHits.forEach((hits, i) => {
+                    if(hits === shipsDeadCount[i]){
+                        infoDisplay.innerHTML = `enemy ${shipIndex[i]} sunk`
+                    }
+                })
+
+                if(enemyShipHits.every((hits, i) => hits === shipsDeadCount[i])){
+                    infoDisplay.innerHTML = 'enemy ships dead'
+                    isGameOver  = true
                 }
-            })
-
-            if(enemyShipHits.every((hits, i) => hits === shipsDeadCount[i])){
-                infoDisplay.innerHTML = 'enemy ships dead'
-                isGameOver  = true
+            }else{
+                sqr.classList.add('miss')
             }
+            enemyFire()
         }else{
-            sqr.classList.add('miss')
+            //MUTLIPLAYER FIRE LOGIC
+            sqr = enemyGrid.querySelector(`div[data-id='${shotFired}']`)
+            const classObj = Object.values(sqrContent)
+            if(classObj.includes('taken')){
+                enemyShipHits[shipIndex.indexOf(classObj[1])]++
+                sqr.classList.add('boom')
+
+                enemyShipHits.forEach((hits, i) => {
+                    if(hits === shipsDeadCount[i]){
+                        infoDisplay.innerHTML = `enemy ${shipIndex[i]} sunk`
+                    }
+                })
+
+                if(enemyShipHits.every((hits, i) => hits === shipsDeadCount[i])){
+                    infoDisplay.innerHTML = 'enemy ships dead'
+                    isGameOver  = true
+                }
+            }else{
+                sqr.classList.add('miss')
+                currentPlayer = 'enemy'
+            }
         }
-        enemyFire()
     }
 
     function enemyFire(square){
@@ -420,5 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 userSquares[square].classList.add('miss')
             }
         }
+
+        currentPlayer = 'user'
     }
 })
