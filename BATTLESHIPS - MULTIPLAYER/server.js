@@ -59,4 +59,15 @@ io.on('connection', socket => {
         connections[playerIndex] = true
     })
 
+    //check player connections, if you connect after other players already in room
+    socket.on('check-players', () => {
+        const players = []
+        for(const i in connections){
+            connections[i] === null ? players.push({connected: false, ready: false}) : 
+            players.push({connected: true, ready: connections[i]})
+        }
+
+        socket.emit('check-players', players)
+    })
+
 })

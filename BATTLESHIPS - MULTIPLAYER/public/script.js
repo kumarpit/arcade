@@ -68,7 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 let player = `.player-${parseInt(num) + 1}`
                 document.querySelector(`${player}`).style.fontWeight = 'bold'
                 document.querySelector(`${player} .connected span`).classList.toggle('green')
-                console.log(playerNum)
+                
+                //get other player status
+                socket.emit('check-players')
             }
         })
 
@@ -78,15 +80,33 @@ document.addEventListener('DOMContentLoaded', () => {
             playerConnectedOrDisconnected(num)
         })
 
+        //on enemy ready
+        socket.on('enemy-ready', num => {
+            enemyReady = true
+            playerReady(num)
+            if(ready) playMultiGame(socket) //allows auto play when you ready before enemy
+        })
+
+        //check player status
+        socket.on('check-players', players => {
+            players.forEach((player, i) => {
+                if(player.connected){
+                    if(i !== playerNum){
+                        playerConnectedOrDisconnected(i)
+                    }
+                }
+                if(player.ready){
+                    playerReady(i)
+                    if(i !== playerNum){
+                        enemyReady = true
+                    }
+                }
+            })
+        })
         function playerConnectedOrDisconnected(num){
             let player =  `.player-${parseInt(num) + 1}`
             document.querySelector(`${player} .connected span`).classList.toggle('green')
         }
-
-        socket.on('enemy-ready', num => {
-            let player = `.player-${parseInt(num) + 1}`
-            document.querySelector(`${player} .ready span`).classList.toggle('green')
-        })
 
         startButton.addEventListener('click', () => {
             if(displayGrid.children.length == 0) {
@@ -306,10 +326,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ready = true
             playerReady(playerNum)
         } 
+
+        if(enemyReady){
+            if(currentPlayer === 'user'){
+                turnDisplay.innerHTML = 'Your Turn'
+            }
+            if(currentPlayer === 'enemy'){
+                turnDisplay.innerHTML = 'Enemy Turn'
+            }
+        }
     }
 
     function playerReady(num){
-        let player = `.player-${parseInt(num)+1}`
+        let player = `.player-${parseInt(num) + 1}`
         document.querySelector(`${player} .ready span`).classList.toggle('green')
     }
 
