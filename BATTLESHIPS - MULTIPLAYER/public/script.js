@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let shotFired = -1
 
     //select player mode
-    singlePlayerButton.addEventListener('click', startSinglePlayer)
-    multiPlayerButton.addEventListener('click', startMultiPlayer)
+    singlePlayerButton.addEventListener('click', startSinglePlayer) //set up single player game
+    multiPlayerButton.addEventListener('click', startMultiPlayer) //set up multiplayer game
     
     //single player function
     function startSinglePlayer(){
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startButton.onclick = () => {
             if(displayGrid.children.length == 0){
                 infoDisplay.innerHTML = ''
-                startSingleGame()
+                playSingleGame() //begin playing
             }else{
                 infoDisplay.innerHTML = 'Place all your ships'
             }
@@ -83,9 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector(`${player} .connected span`).classList.toggle('green')
         }
 
+        socket.on('enemy-ready', num => {
+            let player = `.player-${parseInt(num) + 1}`
+            document.querySelector(`${player} .ready span`).classList.toggle('green')
+        })
+
         startButton.addEventListener('click', () => {
             if(displayGrid.children.length == 0) {
-                startMultiGame(socket)
+                playMultiGame(socket)
             }else{
                 infoDisplay.innerHTML = 'Place all your ships'
             }
@@ -281,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let shipIndex = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier']
 
     //single player game init function
-    function startSingleGame(){
+    function playSingleGame(){
         if(currentPlayer === 'user'){
             turnDisplay.innerHTML = ''
             compSquares.forEach(square => square.addEventListener('click', e => {
@@ -293,8 +298,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function startMultiGame(socket){
-        console.log('multiplayer game mode logic...')
+    function playMultiGame(socket){
+        if(isGameOver) return
+        
+        if(!ready) {
+            socket.emit('player-ready')
+            ready = true
+            playerReady(playerNum)
+        } 
+    }
+
+    function playerReady(num){
+        let player = `.player-${parseInt(num)+1}`
+        document.querySelector(`${player} .ready span`).classList.toggle('green')
     }
 
     //!!!DISABLE DOUBLE CLICK

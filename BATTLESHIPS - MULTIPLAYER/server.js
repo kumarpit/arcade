@@ -53,4 +53,10 @@ io.on('connection', socket => {
         socket.broadcast.emit('player-connection', playerIndex)
     })
 
+    //on ready - listening when the connected socket emits 'ready' msg
+    socket.on('player-ready', () => {
+        socket.broadcast.emit('enemy-ready', playerIndex)
+        connections[playerIndex] = true
+    })
+
 })
