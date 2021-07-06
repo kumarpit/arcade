@@ -124,22 +124,24 @@ document.addEventListener('DOMContentLoaded', () => {
              square.addEventListener('click', () => {
                  if(currentPlayer === 'user' && ready && enemyReady){
                     shotFired = square.dataset.id
-                    socket.emit('fired', shotFired)
+                    // console.log(shotFired)
+                    // console.log('clicked') WORKS
+                    socket.emit('fire', shotFired)
                  }
              })
         })
 
         //on fire recieved
         socket.on('fire', id => {
-            enemyGo(id)
-            const square = userSquares[id]
+            enemyFire(id)
+            const square = userSquares[id].classList
             socket.emit('fire-reply', square)
             playMultiGame(socket)
         })
 
         //on recieveing fire-reply
-        socket.on('fire-reply', classList => {
-            console.log(classList)
+        socket.on('fire-reply', square => {
+            console.log(square)
         })
     }
 
