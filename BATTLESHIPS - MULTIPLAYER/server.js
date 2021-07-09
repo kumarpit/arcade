@@ -85,4 +85,8 @@ io.on('connection', socket => {
         socket.broadcast.emit('fire-reply', square)
     })
 
+    socket.on('msg', msg => {
+        socket.broadcast.emit('msg', msg)
+    })
+
 })

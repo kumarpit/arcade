@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const userSquares = []
     const enemySquares = []
 
+    //chat box 
+    const chatBox = document.querySelector('.chat-box')
+    const msg = document.querySelector('#msg')
+    const sendButton = document.querySelector('#send-button')
+
     //multiplayer additions
     let gameMode = ''
     let playerNum = 0
@@ -55,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startMultiPlayer(){
         playersStatus.style.display = 'flex'
         startButton.style.display = 'block'
+        chatBox.style.display = 'block'
         gameMode = 'multiPlayer'
 
         const socket = io() //only want to use socket when in multiplayer
@@ -144,6 +150,14 @@ document.addEventListener('DOMContentLoaded', () => {
             userFire(null, sqrContent)
             playMultiGame(socket)
         })
+
+        sendButton.addEventListener('click', e => {
+            e.preventDefault
+            socket.emit('msg', msg.value)
+            msg.value = ""
+        })
+
+        socket.on('msg', msg => console.log(msg))
     }
 
     //ship positions
