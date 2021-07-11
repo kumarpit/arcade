@@ -1,15 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 body{
     background-color: whitesmoke;
+}
+
+* {
+    font-family: 'Inter';
+}
+
+::-webkit-scrollbar {
+    background: #fff;
+    width: 1em;
+    border-left: 2px solid black;
+  }
+
+::-webkit-scrollbar-thumb {
+    background: black;
 }
 
 .container { 
     display: flex;
     justify-content: flex-start;
-    width: 92vw;
+    width: 100%;
 }
 
 .container > div {
-    margin: 0 2em 0 0;
+    margin: 0 1em 0 0;
+}
+
+
+.game-mode-buttons-container {
+    display: flex;
+    justify-content: center;
 }
 
 .chat-box {
@@ -21,7 +43,7 @@ body{
 
 input {
     background-color: #f2f2f2;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 1em;
     height: 2em;
 }
@@ -31,7 +53,7 @@ input {
 }
 
 .player-1, .player-2{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter';
     font-style: italic;
     padding: 0 1em 1em 1em;
 }
@@ -62,7 +84,8 @@ span.green{
 .grid > div { 
     width: 40px;
     height: 40px;
-    outline: black solid 1px;
+    outline: black solid 2px;
+    background-color: lightskyblue;
 }
 
 .grid-computer {
@@ -163,14 +186,17 @@ span.green{
 }
 
 .miss { 
-    background-color: grey;
+    background-color: grey !important;
 }
 
 button{
     background-color: #f2f2f2;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 1em;
     padding: 0.3em 0.5em;
+    font-family: 'Inter';
+    font-weight: bold;
+    /* font-family: Arial, Helvetica, sans-serif; */
     font-style: italic;
     box-shadow: 2px 2px black;
     margin: 2em 0;
@@ -190,13 +216,13 @@ button:active{
 }
 
 h3{
-    font-family: arial;
+    font-family: 'Inter';
 }
 
 .destroyer, .submarine, .battleship, .carrier, .cruiser{
-    background-color: black;
+    background-color: black !important;
 }
 
 .hide{
-    background-color: transparent;
+    background-color: lightskyblue !important;
 }

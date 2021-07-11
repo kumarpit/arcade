@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //single player function
     function startSinglePlayer(){
+        playersStatus.style.display = 'none'
+        startButton.style.display = 'none'
+        chatBox.style.display = 'none'
         gameMode = 'singlePlayer'
 
         //clear both boards 
