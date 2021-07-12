@@ -60,17 +60,22 @@ input {
 
 .connected, .ready {
     font-weight: normal;
+    text-decoration: line-through;
 }
 
-.connected span, .ready span{
+/* .connected span, .ready span{
     display: inline-block;
     width: 1em;
     height: 1em;
     background-color: red;
-}
+} */
 
-span.green{
+/* span.green{
     background-color: green;
+} */
+
+.green {
+    text-decoration: none;
 }
 
 .grid-user { 

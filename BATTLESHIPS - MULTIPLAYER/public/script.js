@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(playerNum === 1) currentPlayer = 'enemy'
                 let player = `.player-${parseInt(num) + 1}`
                 document.querySelector(`${player}`).style.fontWeight = 'bold'
-                document.querySelector(`${player} .connected span`).classList.toggle('green')
+                document.querySelector(`${player} .connected`).classList.toggle('green')
                 
                 //get other player status
                 socket.emit('check-players')
