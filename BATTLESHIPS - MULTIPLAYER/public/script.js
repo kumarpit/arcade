@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function playerConnectedOrDisconnected(num){
             let player =  `.player-${parseInt(num) + 1}`
-            document.querySelector(`${player} .connected span`).classList.toggle('green')
+            document.querySelector(`${player} .connected`).classList.toggle('green')
         }
 
         //start button click
@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function playerReady(num){
         let player = `.player-${parseInt(num) + 1}`
-        document.querySelector(`${player} .ready span`).classList.toggle('green')
+        document.querySelector(`${player} .ready`).classList.toggle('green')
     }
 
     //!!!DISABLE DOUBLE CLICK
