@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startSinglePlayer(){
         playersStatus.style.display = 'none'
         startButton.style.display = 'none'
-        chatBox.style.display = 'none'
+        // chatBox.style.display = 'none'
         gameMode = 'singlePlayer'
 
         //clear both boards 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startMultiPlayer(){
         playersStatus.style.display = 'flex'
         startButton.style.display = 'block'
-        chatBox.style.display = 'block'
+        // chatBox.style.display = 'block'
         gameMode = 'multiPlayer'
 
         const socket = io() //only want to use socket when in multiplayer
@@ -154,13 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
             playMultiGame(socket)
         })
 
-        sendButton.addEventListener('click', e => {
-            e.preventDefault
-            socket.emit('msg', msg.value)
-            msg.value = ""
-        })
+        // sendButton.addEventListener('click', e => {
+        //     e.preventDefault
+        //     socket.emit('msg', msg.value)
+        //     msg.value = ""
+        // })
 
-        socket.on('msg', msg => console.log(msg))
+        // socket.on('msg', msg => console.log(msg))
     }
 
     //ship positions

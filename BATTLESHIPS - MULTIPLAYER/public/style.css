@@ -20,7 +20,7 @@ body{
 
 .container { 
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
 }
 
@@ -83,7 +83,6 @@ input {
     height: 400px;
     display: flex;
     flex-wrap: wrap;
-    background-color: #f2f2f2;
 }
 
 .grid > div { 
@@ -98,12 +97,10 @@ input {
     height: 400px;
     display: flex;
     flex-wrap: wrap;
-    background-color: #f2f2f2;
 }
 
 .grid-display {
     width: 240px;
-    background-color: #f2f2f2;
 }
 
 .ship > div {
@@ -186,14 +183,6 @@ input {
     flex-wrap: wrap;
 }
 
-.boom {
-    background-color: red !important;
-}
-
-.miss { 
-    background-color: grey !important;
-}
-
 button{
     background-color: #f2f2f2;
     border: 2px solid black;
@@ -228,13 +217,9 @@ h3{
     background-color: black !important;
 } */
 
-.hide{
-    background-color: lightskyblue !important;
-}
-
 .grid-display-container {
-    /* display: flex;
-    justify-content: center; */
+    display: flex;
+    /* justify-content: center; */
     width: 100%;
 }
 
@@ -250,4 +235,16 @@ h3{
 .ship {
     background-color: hsl(0, 0%, 80%) !important;
     outline: 2px solid black;
+}
+
+.hide{
+    background-color: lightskyblue !important;
+}
+
+.boom {
+    background-color: red !important;
+}
+
+.miss { 
+    background-color: grey !important;
 }
