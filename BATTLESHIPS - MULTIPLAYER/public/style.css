@@ -78,9 +78,13 @@ input {
     text-decoration: none;
 }
 
-.grid-user { 
+.grid {
     width: 400px;
     height: 400px;
+    background-color: lightskyblue;
+}
+
+.grid-user { 
     display: flex;
     flex-wrap: wrap;
 }
@@ -93,14 +97,18 @@ input {
 }
 
 .grid-computer {
-    width: 400px;
-    height: 400px;
     display: flex;
     flex-wrap: wrap;
 }
 
 .grid-display {
     width: 240px;
+}
+
+.ship {
+    border-radius: 2em;
+    border: 2px solid black;
+    margin-right: 0.5em;
 }
 
 .ship > div {
@@ -113,7 +121,6 @@ input {
     height: 40px;
     display: flex;
     /* background-color: black;  */
-    margin: 5px 0px;   
 }
 
 .destroyer-container-vertical {
@@ -127,8 +134,7 @@ input {
     width: 120px;
     height: 40px;
     display: flex;
-    /* background-color: black;  */
-    margin: 5px 0px;     
+    /* background-color: black;  */  
 }
 
 .submarine-container-vertical {
@@ -143,7 +149,6 @@ input {
     height: 40px;
     display: flex;
     /* background-color: black;   */
-    margin: 5px 0px;   
 }
 
 .cruiser-container-vertical { 
@@ -158,7 +163,6 @@ input {
     height: 40px;
     display: flex;
     /* background-color: black;    */
-    margin: 5px 0px;  
 }
 
 .battleship-container-vertical {
@@ -173,7 +177,6 @@ input {
     height: 40px;
     display: flex;
     /* background-color: black;   */
-    margin: 5px 0px;  
 }
 
 .carrier-container-vertical {
@@ -226,25 +229,131 @@ h3{
 .grid-display {
     display: flex;
 }
+/* 
+.taken.vertical::before,
+.taken.horizontal::before {
+    content: '';
+    position: absolute;
+    border: 2px solid blue;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
+}
 
-.ship {
-    margin-right: 0.5em;
+.taken.horizontal::before {
+    animation: ripplesY 3s linear infinite;
+    border-left: none;
+    border-right: none;
+}
+
+.taken.vertical::before {
+    animation: ripplesX 3s linear infinite;
+    border-top: none;
+    border-bottom: none;
+} */
+
+@keyframes ripplesX {
+    0%{
+        opacity: 1;
+        transform: scaleX(1)
+    }
+
+    100%{
+        opacity: 0;
+        transform: scaleX(1.5);
+    }
+}
+
+@keyframes ripplesY {
+    0%{
+        opacity: 1;
+        transform: scaleY(1)
+    }
+
+    100%{
+        opacity: 0;
+        transform: scaleY(1.5);
+    }
 }
 
 .taken,
 .ship {
     background-color: hsl(0, 0%, 80%) !important;
-    outline: 2px solid black;
 }
 
 .hide{
     background-color: lightskyblue !important;
 }
 
-.boom {
+/* .boom {
     background-color: red !important;
 }
 
 .miss { 
     background-color: grey !important;
+} */
+
+.miss,
+.boom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boom{
+    background-color: blue;
+}
+
+.boom::after,
+.miss::after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.miss::after{
+    background-color: white;
+}
+
+.boom::after{
+    background-color: red;
+}
+
+.miss::before,
+.boom::before {
+    content: '';
+    position: absolute;
+    animation: hit 0.2s ease-out forwards;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.boom::before {
+    border-color: red;
+}
+
+.miss::before {
+    border-color: white;
+}
+
+@keyframes hit {
+    0%{
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    99%{
+        opacity: 0;
+        transform: scale(4);
+    }
+
+    100%{
+        transform: scale(0);
+    }
 }

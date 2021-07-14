@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }else{
                 let startIndex = dropIndex - cellsToFirst
                 for(let i = startIndex; i < startIndex + draggedShipLength; i++){
-                    userSquares[i].classList.add('taken', shipClass)
+                    userSquares[i].classList.add('taken', 'horizontal', shipClass)
                 }
                 displayGrid.removeChild(draggedShip)
             }
@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }else{
                 let startIndex = dropIndex - cellsToFirst
                 for(let i = startIndex; i < startIndex + (draggedShipLength * dim); i += dim){
-                    userSquares[i].classList.add('taken', shipClass)
+                    userSquares[i].classList.add('taken', 'vertical', shipClass)
                 }
                 displayGrid.removeChild(draggedShip)
             }
