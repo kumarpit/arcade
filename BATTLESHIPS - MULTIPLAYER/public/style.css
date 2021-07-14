@@ -115,7 +115,7 @@ input {
     width: 80px;
     height: 40px;
     display: flex;
-    background-color: black; 
+    /* background-color: black;  */
     margin: 5px 0px;   
 }
 
@@ -130,7 +130,7 @@ input {
     width: 120px;
     height: 40px;
     display: flex;
-    background-color: black; 
+    /* background-color: black;  */
     margin: 5px 0px;     
 }
 
@@ -145,7 +145,7 @@ input {
     width: 120px;
     height: 40px;
     display: flex;
-    background-color: black;  
+    /* background-color: black;   */
     margin: 5px 0px;   
 }
 
@@ -160,7 +160,7 @@ input {
     width: 160px;
     height: 40px;
     display: flex;
-    background-color: black;   
+    /* background-color: black;    */
     margin: 5px 0px;  
 }
 
@@ -175,7 +175,7 @@ input {
     width: 200px;
     height: 40px;
     display: flex;
-    background-color: black;  
+    /* background-color: black;   */
     margin: 5px 0px;  
 }
 
@@ -224,10 +224,30 @@ h3{
     font-family: 'Inter';
 }
 
-.destroyer, .submarine, .battleship, .carrier, .cruiser{
+/* .destroyer, .submarine, .battleship, .carrier, .cruiser{
     background-color: black !important;
-}
+} */
 
 .hide{
     background-color: lightskyblue !important;
+}
+
+.grid-display-container {
+    /* display: flex;
+    justify-content: center; */
+    width: 100%;
+}
+
+.grid-display {
+    display: flex;
+}
+
+.ship {
+    margin-right: 0.5em;
+}
+
+.taken,
+.ship {
+    background-color: hsl(0, 0%, 80%) !important;
+    outline: 2px solid black;
 }
