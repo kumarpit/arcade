@@ -398,7 +398,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 enemyShipHits[shipIndex.indexOf(sqr.classList[2])]++
                 sqr.classList.add('boom')
                 // console.log(enemyShipHits)
-
                 enemyShipHits.forEach((hits, i) => {
                     if(hits === shipsDeadCount[i]){
                         infoDisplay.innerHTML = `Enemy ${shipIndex[i]} Sunk`
@@ -418,17 +417,18 @@ document.addEventListener('DOMContentLoaded', () => {
             sqr = enemyGrid.querySelector(`div[data-id='${shotFired}']`)
             const classObj = Object.values(sqrContent)
             if(classObj.includes('taken')){
-                enemyShipHits[shipIndex.indexOf(classObj[1])]++
+                // console.log(classObj)
+                enemyShipHits[shipIndex.indexOf(classObj[2])]++
                 sqr.classList.add('boom')
 
                 enemyShipHits.forEach((hits, i) => {
                     if(hits === shipsDeadCount[i]){
-                        infoDisplay.innerHTML = `enemy ${shipIndex[i]} sunk`
+                        infoDisplay.innerHTML = `Enemy ${shipIndex[i]} sunk`
                     }
                 })
 
                 if(enemyShipHits.every((hits, i) => hits === shipsDeadCount[i])){
-                    infoDisplay.innerHTML = 'enemy ships dead'
+                    infoDisplay.innerHTML = 'Enemy Ships Dead'
                     isGameOver  = true
                 }
             }else{
