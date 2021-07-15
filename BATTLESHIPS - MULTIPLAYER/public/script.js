@@ -401,12 +401,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 enemyShipHits.forEach((hits, i) => {
                     if(hits === shipsDeadCount[i]){
-                        infoDisplay.innerHTML = `enemy ${shipIndex[i]} sunk`
+                        infoDisplay.innerHTML = `Enemy ${shipIndex[i]} Sunk`
                     }
                 })
 
                 if(enemyShipHits.every((hits, i) => hits === shipsDeadCount[i])){
-                    infoDisplay.innerHTML = 'enemy ships dead'
+                    infoDisplay.innerHTML = 'Enemy Ships Dead'
                     isGameOver  = true
                 }
             }else{
