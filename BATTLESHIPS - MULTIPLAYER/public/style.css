@@ -86,7 +86,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 1em 0 0 0;
+    margin-top: 1em;
 }
 
 /* .connected span, .ready span{
@@ -225,10 +225,6 @@ button {
     margin: 2em 0;
 }
 
-#start{
-    display: none;
-}
-
 button:hover{
     cursor: pointer;
 }
@@ -240,7 +236,7 @@ button:active{
 
 h3{
     font-family: 'Inter';
-    margin-top: -0.3em;
+    margin: 1em 0 0 0;
 }
 
 /* .destroyer, .submarine, .battleship, .carrier, .cruiser{
@@ -384,4 +380,10 @@ h3{
     100%{
         transform: scale(0);
     }
+}
+
+#start{
+    display: none;
+    padding: none;
+    margin: 1em 0 0 0;
 }
