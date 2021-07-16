@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.querySelector('#start')
     const turnDisplay = document.querySelector('#turn-name')
     const infoDisplay = document.querySelector('#info')
+    const infoDiv = document.querySelector('.hidden-info')
     const singlePlayerButton = document.querySelector('#single-player')
     const multiPlayerButton = document.querySelector('#multi-player')
     const playersStatus = document.querySelector('.players-status')
@@ -18,30 +19,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const userSquares = []
     const enemySquares = []
 
+    //ship positions
+    const shipSpecs = [
+        {
+            name: 'destroyer',
+            orientation: [
+                [0, 1],
+                [0, dim]
+            ]
+        },
+        {
+            name: 'submarine',
+            orientation: [
+                [0, 1, 2],
+                [0, dim, dim * 2]
+            ]
+        },
+        {
+            name: 'cruiser',
+            orientation: [
+                [0, 1, 2],
+                [0, dim, dim * 2]
+            ]
+        },
+        {
+            name: 'battleship',
+            orientation: [
+                [0, 1, 2, 3],
+                [0, dim, dim * 2, dim * 3]
+            ]
+        },
+        {
+            name: 'carrier',
+            orientation: [
+                [0, 1, 2, 3, 4],
+                [0, dim, dim * 2, dim * 3, dim * 4]
+            ]
+        },
+    ]
+
     //chat box 
     const chatBox = document.querySelector('.chat-box')
     const msg = document.querySelector('#msg')
     const sendButton = document.querySelector('#send-button')
 
     //multiplayer additions
-    let gameMode = ''
+    // let gameMode = '' //comes from file
     let playerNum = 0
     let ready = false
     let enemyReady = false
     let shotFired = -1
 
+    //start game test
+    if(gameMode === 'singlePlayer') {
+        startSinglePlayer()
+    }else if(gameMode === 'multiPlayer') {
+        startMultiPlayer()
+    }
+
     //select player mode
     singlePlayerButton.addEventListener('click', startSinglePlayer) //set up single player game
     multiPlayerButton.addEventListener('click', startMultiPlayer) //set up multiplayer game
-    
+
     //single player function
     function startSinglePlayer(){
         playersStatus.style.display = 'none'
         startButton.style.display = 'none'
         // chatBox.style.display = 'none'
-        gameMode = 'singlePlayer'
+        // gameMode = 'singlePlayer'
+        multiPlayerButton.style.display = singlePlayerButton.style.display = 'none'  //hide buttons
 
-        //clear both boards 
+        createBoard(userGrid, userSquares)
+        createBoard(enemyGrid, enemySquares)
 
         for(ship of shipSpecs){
             generateShip(ship)
@@ -64,7 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
         playersStatus.style.display = 'flex'
         startButton.style.display = 'block'
         // chatBox.style.display = 'block'
-        gameMode = 'multiPlayer'
+        // gameMode = 'multiPlayer'
+        multiPlayerButton.style.display = singlePlayerButton.style.display = 'none'  //hide buttons
+
+        createBoard(userGrid, userSquares)
+        createBoard(enemyGrid, enemySquares)
 
         const socket = io() //only want to use socket when in multiplayer
 
@@ -122,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //start button click
         startButton.addEventListener('click', () => {
             if(displayGrid.children.length == 0) {
+                infoDiv.style.alignItems = 'center'
                 playMultiGame(socket)
             }else{
                 infoDisplay.innerHTML = 'Place all your ships'
@@ -163,45 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // socket.on('msg', msg => console.log(msg))
     }
 
-    //ship positions
-    const shipSpecs = [
-        {
-            name: 'destroyer',
-            orientation: [
-                [0, 1],
-                [0, dim]
-            ]
-        },
-        {
-            name: 'submarine',
-            orientation: [
-                [0, 1, 2],
-                [0, dim, dim * 2]
-            ]
-        },
-        {
-            name: 'cruiser',
-            orientation: [
-                [0, 1, 2],
-                [0, dim, dim * 2]
-            ]
-        },
-        {
-            name: 'battleship',
-            orientation: [
-                [0, 1, 2, 3],
-                [0, dim, dim * 2, dim * 3]
-            ]
-        },
-        {
-            name: 'carrier',
-            orientation: [
-                [0, 1, 2, 3, 4],
-                [0, dim, dim * 2, dim * 3, dim * 4]
-            ]
-        },
-    ]
-
     //create boards
     function createBoard(grid, arr){
         for(let i = 0; i < dim * dim; i++){
@@ -211,9 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
             arr.push(square)
         }
     }
-
-    createBoard(userGrid, userSquares)
-    createBoard(enemyGrid, enemySquares)
 
     //draw ships in random positions
     function generateShip(ship){
@@ -367,6 +379,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function playMultiGame(socket){
         if(isGameOver) return
         
+        infoDisplay.innerHTML = ''
+
+        startButton.style.display = 'none'
+
         if(!ready) {
             socket.emit('player-ready')
             ready = true
@@ -380,6 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if(currentPlayer === 'enemy'){
                 turnDisplay.innerHTML = 'Enemy Turn'
             }
+
+        }else{
+            turnDisplay.innerHTML = 'Waiting For Enemy'
         }
     }
 

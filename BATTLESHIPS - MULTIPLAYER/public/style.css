@@ -28,6 +28,23 @@ body{
     margin: 0 1em 0 0;
 }
 
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash-container > h1 {
+    margin: 0;
+    font-size: 2.1em;
+}
+
+.splash-buttons-container {
+    margin-top: -0.6em;
+}
 
 .game-mode-buttons-container {
     display: flex;
@@ -50,6 +67,8 @@ input {
 
 .players-status {
     display: none;
+    justify-content: center;
+    margin: 1em;
 }
 
 .player-1, .player-2{
@@ -61,6 +80,13 @@ input {
 .connected, .ready {
     font-weight: normal;
     text-decoration: line-through;
+}
+
+.hidden-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em 0 0 0;
 }
 
 /* .connected span, .ready span{
@@ -186,7 +212,7 @@ input {
     flex-wrap: wrap;
 }
 
-button{
+button {
     background-color: #f2f2f2;
     border: 2px solid black;
     border-radius: 1em;
@@ -214,6 +240,7 @@ button:active{
 
 h3{
     font-family: 'Inter';
+    margin-top: -0.3em;
 }
 
 /* .destroyer, .submarine, .battleship, .carrier, .cruiser{
@@ -222,12 +249,13 @@ h3{
 
 .grid-display-container {
     display: flex;
-    /* justify-content: center; */
     width: 100%;
 }
 
 .grid-display {
     display: flex;
+    justify-content: center;
+    width: 100%;
 }
 /* 
 .taken.vertical::before,
