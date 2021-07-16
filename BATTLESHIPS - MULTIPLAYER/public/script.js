@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //chat box 
     const chatBox = document.querySelector('.chat-box')
+    const msgDisplay = document.querySelector('#msg-display')
     const msg = document.querySelector('#msg')
     const sendButton = document.querySelector('#send-button')
 
@@ -77,16 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
         startMultiPlayer()
     }
 
-    //select player mode
-    singlePlayerButton.addEventListener('click', startSinglePlayer) //set up single player game
-    multiPlayerButton.addEventListener('click', startMultiPlayer) //set up multiplayer game
-
     //single player function
     function startSinglePlayer(){
         playersStatus.style.display = 'none'
         startButton.style.display = 'none'
-        // chatBox.style.display = 'none'
-        // gameMode = 'singlePlayer'
         multiPlayerButton.style.display = singlePlayerButton.style.display = 'none'  //hide buttons
 
         createBoard(userGrid, userSquares)
@@ -112,8 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startMultiPlayer(){
         playersStatus.style.display = 'flex'
         startButton.style.display = 'block'
-        // chatBox.style.display = 'block'
-        // gameMode = 'multiPlayer'
+        chatBox.style.display = 'block'
         multiPlayerButton.style.display = singlePlayerButton.style.display = 'none'  //hide buttons
 
         createBoard(userGrid, userSquares)
@@ -124,7 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
         //get player number
         socket.on('player-number', num => {
             if(num === -1){
+                turnDisplay.innerHTML = ''
                 infoDisplay.innerHTML= 'ROOM FULL'
+                startButton.style.display = 'none'
+                displayGrid.style.display = 'none'
             }else{
                 playerNum = parseInt(num)
                 if(playerNum === 1) currentPlayer = 'enemy'
@@ -208,13 +205,15 @@ document.addEventListener('DOMContentLoaded', () => {
             playMultiGame(socket)
         })
 
-        // sendButton.addEventListener('click', e => {
-        //     e.preventDefault
-        //     socket.emit('msg', msg.value)
-        //     msg.value = ""
-        // })
+        sendButton.addEventListener('click', e => {
+            e.preventDefault
+            if(msg.value !== ''){
+                socket.emit('msg', msg.value)
+                msg.value = ""
+            }
+        })
 
-        // socket.on('msg', msg => console.log(msg))
+        socket.on('msg', msg => alert(msg))
     }
 
     //create boards

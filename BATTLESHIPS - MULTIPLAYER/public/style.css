@@ -53,8 +53,7 @@ body{
 
 .chat-box {
     display: none;
-    width: 400px;
-    height: 400px;
+    margin-top: 1em;
     /* border: 1px solid black; */
 }
 
@@ -63,6 +62,10 @@ input {
     border: 2px solid black;
     border-radius: 1em;
     height: 2em;
+}
+
+#send-button {
+    margin: 0;
 }
 
 .players-status {
