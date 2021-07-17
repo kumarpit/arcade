@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 section.game{
 	display: flex;
@@ -17,21 +18,22 @@ body{
 	display: flex;
 	padding: 1em;
 	justify-content: space-around;
-	border: 5px solid black;
+	border: 6px solid black;
 	background-color: white;
 	width: 45%;
 	box-shadow: 3px 3px 10px black;
 }
 
 #nextPiece{
-	border: 4px solid black;
+	border: 6px solid black;
 	/* margin-left: 2em; */
 	margin-top: -1em;
+	margin-bottom: 1.3em;
 }
 
 #gameCanvas{
 	background-color: white;
-	border: 4px solid black;
+	border: 6px solid black;
 	/*box-shadow: 5px 5px blue;*/
 }
 
@@ -78,6 +80,19 @@ h2{
 p{
 	font-family: "Press Start 2P";
 	font-size: 1.5em;
+}
+
+.scores {
+	font-family: 'Inter';
+	font-style: italic;
+	font-size: 1.1em;
+	font-weight: 400;
+	line-height: 0.6em;
+}
+
+.scores > span {
+	/* font-family: 'Press Start 2P'; */
+	font-weight: 700;
 }
 /* 
 @media only screen and (max-width: 1200px) {
