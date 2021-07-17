@@ -1,15 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
 body{
 	margin: 0;
-	background-color: slategray;
+	/* background-color: slategray; */
+	/* background-color:deepskyblue; */
+	background-color: skyblue;
 	overflow-y: hidden;
 }
 
 .grid-container{
-	display: grid;
-	grid-template-columns: 1% 99%;
-	/* align-items: center; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 100vh;
 	width: 100%;
 }
@@ -24,7 +27,7 @@ body{
 }
 
 h3{
-	font-family: "Press Start 2P";
+	font-family: "Inter";
 	transform: scale(1, 1.2);
 }
 
@@ -37,6 +40,7 @@ h3{
 #gameCanvas{
 	border: 8px solid black;
 	background-color: whitesmoke;
+	box-shadow: 3px 3px 10px black;
 	
 }
 

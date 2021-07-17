@@ -91,7 +91,8 @@ function createFood(){
 }
 
 function drawFood(){
-	ctx.fillStyle = "rgb(255,0,100)";
+	// ctx.fillStyle = "rgb(255,0,100)";
+	ctx.fillStyle = "red"
 	ctx.fillRect(food.x*scl, food.y*scl, scl, scl);
 }
 

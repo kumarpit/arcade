@@ -105,9 +105,8 @@ function drawGrid(){
 	arena.forEach((row, y) => {
 		row.forEach((value, x) => {
 				ctx.beginPath()
-				ctx.strokeStyle = "black";
-				// ctx.lineWidth = 0.1/scl;
-				ctx.lineWidth = 0.2/scl;
+				ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+				ctx.lineWidth = 2/scl;
 				ctx.rect(x,
 				         y,
 				         1, 1);
@@ -120,9 +119,8 @@ function drawGrid2(){
 	notArena.forEach((row, y) => {
 		row.forEach((value, x) => {
 				ctx2.beginPath()
-				ctx2.strokeStyle = "black";
-				// ctx.lineWidth = 0.1/scl;
-				ctx2.lineWidth = 0.2/scl;
+				ctx2.strokeStyle = "rgba(0, 0, 0, 0.2)";
+				ctx2.lineWidth = 2/scl;
 				ctx2.rect(x,
 				         y,
 				         1, 1);

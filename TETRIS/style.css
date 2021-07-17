@@ -9,9 +9,8 @@ section.game{
 
 body{
 	margin: 0;
-	/* background-color: #5300ff; */
 	/* background-color: blue; */
-	background-color: #f2f2f2;
+	background-color:deepskyblue;
 }
 
 .container{
@@ -21,7 +20,7 @@ body{
 	border: 5px solid black;
 	background-color: white;
 	width: 45%;
-	/* box-shadow: 3px 3px 10px black; */
+	box-shadow: 3px 3px 10px black;
 }
 
 #nextPiece{
@@ -80,7 +79,7 @@ p{
 	font-family: "Press Start 2P";
 	font-size: 1.5em;
 }
-
+/* 
 @media only screen and (max-width: 1200px) {
 	.container{
 		display: flex;
@@ -126,4 +125,4 @@ p{
 		height: 90vh;
 	}
 
-}
+} */
