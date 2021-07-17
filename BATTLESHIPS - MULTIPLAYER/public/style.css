@@ -92,6 +92,10 @@ input {
     margin-top: 1em;
 }
 
+#info {
+    margin-bottom: 1em;
+}
+
 /* .connected span, .ready span{
     display: inline-block;
     width: 1em;

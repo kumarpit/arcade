@@ -364,6 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //single player game init function
     function playSingleGame(){
+        startButton.style.display = 'none'
+        
         if(currentPlayer === 'user'){
             turnDisplay.innerHTML = ''
             enemySquares.forEach(square => square.addEventListener('click', e => {
