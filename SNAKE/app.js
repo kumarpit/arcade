@@ -95,6 +95,16 @@ function drawFood(){
 	ctx.fillRect(food.x*scl, food.y*scl, scl, scl);
 }
 
+// function gridLines(){ //very slow idky
+// 	for(let i = 0; i < canv.width; i += scl){
+// 		for(let j = 0; j < canv.height; j += scl){
+// 			ctx.strokeStyle = "black"
+// 			ctx.rect(i, j, scl, scl)
+// 			ctx.stroke()
+// 		}
+// 	}
+// }
+
 let lastTime = 0;
 let deltaTime = 0;
 let countTime = 0;
@@ -124,7 +134,7 @@ function update(time){
 let snake = new Snake(0, 0);
 createFood();
 
-//desktops
+//desktops keyboard control
 document.addEventListener("keydown", e =>{
 	switch(e.keyCode){
 		case 37:
@@ -142,51 +152,51 @@ document.addEventListener("keydown", e =>{
 	};
 });
 
-//mobile
-document.addEventListener('touchstart', handleTouchStart, false);        
-document.addEventListener('touchmove', handleTouchMove, false);
+//mobile touch controls
+// document.addEventListener('touchstart', handleTouchStart, false);        
+// document.addEventListener('touchmove', handleTouchMove, false);
 
-var xDown = null;                                                        
-var yDown = null;                                                        
+// var xDown = null;                                                        
+// var yDown = null;                                                        
 
-function getTouches(evt) {
-	return evt.touches
-}
+// function getTouches(evt) {
+// 	return evt.touches
+// }
 
-function handleTouchStart(evt) {  
-	const firstTouch = getTouches(evt)[0];                                       
-    xDown = firstTouch.clientX;                                      
-    yDown = firstTouch.clientY;                                      
-};                                                
+// function handleTouchStart(evt) {  
+// 	const firstTouch = getTouches(evt)[0];                                       
+//     xDown = firstTouch.clientX;                                      
+//     yDown = firstTouch.clientY;                                      
+// };                                                
 
-function handleTouchMove(evt) {
-    if ( ! xDown || ! yDown ) {
-        return;
-    }
+// function handleTouchMove(evt) {
+//     if ( ! xDown || ! yDown ) {
+//         return;
+//     }
 
-    var xUp = evt.touches[0].clientX;                                    
-    var yUp = evt.touches[0].clientY;
+//     var xUp = evt.touches[0].clientX;                                    
+//     var yUp = evt.touches[0].clientY;
 
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
+//     var xDiff = xDown - xUp;
+//     var yDiff = yDown - yUp;
 
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-        if ( xDiff > 0 ) {
-            snake.setDir(-scl, 0)
-        } else {
-            snake.setDir(scl, 0)
-        }                       
-    } else {
-        if ( yDiff > 0 ) {
-            snake.setDir(0, -scl)
-        } else { 
-            snake.setDir(0, scl)
-        }                                                                 
-    }
-    /* reset values */
-    xDown = null;
-    yDown = null;                                             
-};
+//     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+//         if ( xDiff > 0 ) {
+//             snake.setDir(-scl, 0)
+//         } else {
+//             snake.setDir(scl, 0)
+//         }                       
+//     } else {
+//         if ( yDiff > 0 ) {
+//             snake.setDir(0, -scl)
+//         } else { 
+//             snake.setDir(0, scl)
+//         }                                                                 
+//     }
+//     /* reset values */
+//     xDown = null;
+//     yDown = null;                                             
+// };
 
 
 window.requestAnimationFrame(update);
