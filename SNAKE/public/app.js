@@ -28,7 +28,7 @@ let gameState = {
         x: 7,
         y: 7
     },
-    scl: 20
+    size: 20 //grid size
 }
 
 function init(){
@@ -44,7 +44,7 @@ function init(){
 }
 
 function keydown(e){
-    console.log(e.keyCode)
+    socket.emit('keydown', e.keyCode)
 }
 
 init()
@@ -54,22 +54,22 @@ function renderState(state){
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     //disassembling state for ease of use
-    const scl = state.scl
+    const size = state.size
     const food = state.food
-    const size = canvas.width / scl
+    const scale = canvas.width / size
 
     ctx.fillStyle = FOOD_COLOR
-    ctx.fillRect(food.x * scl, food.y * scl, scl, scl)
+    ctx.fillRect(food.x * scale, food.y * scale, scale, scale)
 
-    renderPlayer(state.player, scl, SNAKE_COLOR)
+    renderPlayer(state.player, scale, SNAKE_COLOR)
 }
 
-function renderPlayer(player, scl, color){
+function renderPlayer(player, scale, color){
     const snake = player.snake
 
     ctx.fillStyle = color
     for(let cell of snake){
-        ctx.fillRect(cell.x * scl, cell.y * scl, scl, scl)
+        ctx.fillRect(cell.x * scale, cell.y * scale, scale, scale)
     }
 }
 

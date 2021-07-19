@@ -8,7 +8,7 @@ const app = express()
 const server = http.createServer(app) 
 const io = socketio(server)
 
-const { createGameState, gameLoop } = require('./game')
+const { createGameState, gameLoop, getUpdatedVelocity } = require('./game')
 const { FRAME_RATE } = require('./constants')
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -20,6 +20,24 @@ server.listen(PORT, () => {
 
 io.on('connection', socket => {
     const state = createGameState()
+
+    socket.on('keydown', handleKeydown)
+
+    function handleKeydown(keyCode){
+        try{
+            keyCode = parseInt(keyCode)
+        }catch(e){
+            console.log(e)
+            return
+        }
+
+        const vel = getUpdatedVelocity(keyCode)
+
+        if(vel){
+            state.player.vel = vel
+        }
+    }
+
     startGameInterval(socket, state)
 
     console.log('[NEW CONNECTION]')
