@@ -1,7 +1,7 @@
 const canv = document.getElementById("gameCanvas");
 const ctx = canv.getContext("2d");
 const scl = 25;
-const fps = 5; 
+const fps = 10; 
 let food;
 let score = document.getElementById('score')
 
@@ -28,16 +28,14 @@ class Snake{
 	}
 	moveSnake(){
 		let len = this.body.length;
-		let headx = this.body[len-1].x + this.dir.x;
-		let heady = this.body[len-1].y + this.dir.y;
+		let newx = this.body[len-1].x + this.dir.x;
+		let newy = this.body[len-1].y + this.dir.y;
 		if(len == 1){
-			if(!this.dead({x: headx, y: heady})){
+			if(!this.dead({x: newx, y: newy})){
 				this.body[0].x += this.dir.x;
 				this.body[0].y += this.dir.y;
 			}
 		}else{
-			let newx = this.body[len-1].x + this.dir.x;
-			let newy = this.body[len-1].y + this.dir.y;
 			if(!this.dead({x: newx, y: newy})){
 				this.body.push({x: newx, y: newy});
 				this.body.shift();
@@ -61,18 +59,24 @@ class Snake{
 	grow(){
 		let x = this.body[0].x;
 		let y = this.body[0].y;
-		this.body.unshift({x: x, y: y});
+		this.body.unshift({x: x, y: y}); //adding a duplicate tail
 	}
-	dead(head){
-		if(head.x > canv.width - scl || head.x < 0 || head.y > canv.height - scl || head.y < 0 || this.runIntoSelf(head)){
+	dead(newPos){
+		if (newPos.x > canv.width - scl ||
+			newPos.x < 0 ||
+			newPos.y > canv.height - scl ||
+			newPos.y < 0 || 
+			this.runIntoSelf(newPos)){
+
 			return true;
 		}
+
 		return false;
 	}
-	runIntoSelf(head){
-		for(let i = 0; i < this.body.length - 1; i++){
-			if(head.x == this.body[i].x && head.y == this.body[i].y){
-				return true;
+	runIntoSelf(newPos){
+		for(let cell of this.body){
+			if(cell.x == newPos.x && cell.y == newPos.y){
+				return true
 			}
 		}
 		return false;
@@ -80,16 +84,16 @@ class Snake{
 }
 
 function createFood(){
-	let x, y;
-	do{
-		x = Math.random() * (canv.width / scl)  | 0;
-		y = Math.random() * (canv.height / scl) | 0;
-	}while(snake.body.forEach(el => {
-		if(x == el.x && y == el.y){
-			return true;
+	let fx = Math.random() * (canv.width / scl)  | 0;
+	let fy = Math.random() * (canv.height / scl) | 0;
+	
+	for(let cell of snake.body){
+		if(cell.x === fx && cell.y === fy){
+			return createFood()
 		}
-	}));
-	food = {x: x, y: y};
+	}
+	
+	food = {x: fx, y: fy};
 }
 
 function drawFood(){

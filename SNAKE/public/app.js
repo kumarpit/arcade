@@ -2,34 +2,14 @@ const BG_COLOR = 'whitesmoke'
 const SNAKE_COLOR = 'deepskyblue'
 const FOOD_COLOR= 'red'
 const socket = io()
+let scoreDisplay = document.getElementById('score')
 
 socket.on('init', handleInit)
 socket.on('gameState', handleGameState)
 
 let canvas, ctx
 
-let gameState = {
-    player: {
-        pos: { //head of snake
-            x: 3,
-            y: 10
-        },
-        vel: {
-            x: 1,
-            y: 0
-        },
-        snake: [
-            {x: 1, y: 10}, 
-            {x: 2, y: 10},
-            {x: 3, y: 10}
-        ]
-    },
-    food: {
-        x: 7,
-        y: 7
-    },
-    size: 20 //grid size
-}
+let gameState
 
 function init(){
     canvas = document.getElementById('gameCanvas')
@@ -82,4 +62,6 @@ function handleGameState(state){
     requestAnimationFrame(() => {
         renderState(gameState)
     })
+
+    scoreDisplay.innerHTML = gameState.player.snake.length - 1
 }
