@@ -25,8 +25,10 @@ const LIVES = 3
 const ROIDS_POINT_LRG = 20
 const ROIDS_POINT_MED = 50
 const ROIDS_POINT_SMALL = 100
-const bg = "black"
-const strk = "white"
+const bg = "#96ff5d"
+const strk = "black"
+const LINE_WIDTH_FACTOR = 4.2
+const SHOW_SCORE = false
 let score 
 
 // let lasers = []
@@ -259,7 +261,8 @@ function update(time){
 		//draw ship (TRIANGULAR)
 		if(blinkOn && !ship.dead){
 			ctx.strokeStyle = strk;
-			ctx.lineWidth = SHIP_SIZE/8;
+			ctx.fillStyle = strk;
+			ctx.lineWidth = SHIP_SIZE/LINE_WIDTH_FACTOR;
 			ctx.beginPath();
 			ctx.moveTo( //tip of the ship
 				ship.x + 4/3*ship.r*Math.cos(ship.a),
@@ -275,6 +278,7 @@ function update(time){
 				);
 			ctx.closePath();
 			ctx.stroke();
+			ctx.fill()
 		}
 
 		if(ship.blinkNum > 0){
@@ -305,7 +309,7 @@ function update(time){
 
 		for(let i=0; i < asteroids.length; i++){
 			ctx.strokeStyle = strk
-			ctx.lineWidth = SHIP_SIZE/8
+			ctx.lineWidth = SHIP_SIZE/LINE_WIDTH_FACTOR
 			x = asteroids[i].x
 			y = asteroids[i].y
 			xv = asteroids[i].xv
@@ -381,7 +385,7 @@ function update(time){
 			//ctx.fillStyle = "white"
 			if(blinkOn && !ship.dead){
 				ctx.strokeStyle = strk;
-				ctx.lineWidth = SHIP_SIZE/8;
+				ctx.lineWidth = SHIP_SIZE/LINE_WIDTH_FACTOR;
 				ctx.beginPath();
 				ctx.moveTo( //rear left
 					ship.x - ship.r*(2/3*Math.cos(ship.a) + 0.5*Math.sin(ship.a)),
@@ -412,7 +416,7 @@ function update(time){
 		}
 
 		//draw level text
-		if(textAlpha >= 0){
+		// if(textAlpha >= 0){
 			//ctx.beginPath()
 			// ctx.textAlign = "center"
 			// ctx.textBaseLine = "middle"
@@ -420,19 +424,20 @@ function update(time){
 			// ctx.font = "normal " + 	TEXT_SIZE + "px Press Start 2P";
 			// ctx.fillText(text, canv.width/2, SHIP_SIZE)
 			// textAlpha -= (1.0/TEXT_FADE_TIME/FPS)
-		}
+		// }
 		// else if(ship.dead){
 		// 	newGame()
 		// }
 
 		//draw lives
 		for(let i=0; i < lives; i++){
-			let x = SHIP_SIZE + i * SHIP_SIZE * 1.3
-			let y = SHIP_SIZE
+			let x = SHIP_SIZE + i * SHIP_SIZE * 1.5 + 10
+			let y = SHIP_SIZE + 10
 			let r = 15
 			let a = 90/180*Math.PI
 			ctx.strokeStyle = strk;
-			ctx.lineWidth = 30/8;
+			ctx.fillStyle = strk;
+			ctx.lineWidth = SHIP_SIZE/LINE_WIDTH_FACTOR;
 			ctx.beginPath();
 			ctx.moveTo( //tip of the ship
 				x + 4/3*r*Math.cos(a),
@@ -448,6 +453,7 @@ function update(time){
 				);
 			ctx.closePath();
 			ctx.stroke();
+			ctx.fill()
 		}
 
 		//draw the score
@@ -456,7 +462,9 @@ function update(time){
 		ctx.textBaseLine = "middle"
 		ctx.fillStyle = strk
 		ctx.font = "normal " + TEXT_SIZE*1 + "px 'Press Start 2P'";
-		ctx.fillText(score, canv.width - SHIP_SIZE/2, SHIP_SIZE + 15)
+		if(SHOW_SCORE){
+			ctx.fillText(score, canv.width - SHIP_SIZE/2, SHIP_SIZE + 15)
+		}
 
 		//draw highScore
 		// ctx.beginPath()

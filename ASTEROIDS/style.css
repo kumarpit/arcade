@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
-/* html{
-	cursor: url(../images/icon_cursor_default.png), default !important;
-} */
 
-.body{
+
+body{
 	margin: 0;
+	background-color: #96ff5d;
 }
 
 .main{
@@ -20,7 +19,7 @@
 	font-size: 1.5em;
 	line-height: 0.6em;
 	text-align: center;
-	color: white;
+	color: black;
 }
 
 h1{
@@ -60,17 +59,13 @@ p{
 }
 
 #gameCanvas{
-	background-color: black;
+	background-color: slategray;
 	margin: 0;
 	/*always set canvas width and height using style in the index.html file itself to avoid blurry images*/
 }
 
-body{
-	background-color: black;
-}
-
 h3{
 	font-family: "Press Start 2P", cursive;
-	color: white;
+	color: black;
 }
 
