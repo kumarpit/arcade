@@ -21,7 +21,7 @@ class Snake{
 		this.dir.y = ydir;
 	}
 	drawSnake(){
-		ctx.fillStyle = "deepskyblue"
+		ctx.fillStyle = "black"
 		this.body.forEach(el => {
 			ctx.fillRect(el.x, el.y, scl, scl);
 		})
