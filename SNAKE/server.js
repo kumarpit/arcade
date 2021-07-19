@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000
 const app = express()
 
 const server = http.createServer(app) //creating an http server
+const io = socketio(server)
 
 //serve public folder
 app.use(express.static(path.join(__dirname, 'public')))
@@ -16,5 +17,8 @@ server.listen(PORT, () => {
     console.log(`[SERVER LISTENING ON ${PORT}]`)
 })
 
-
 //multiplayer - same screen two snakes one food, if 2 snakes collide game over, longest snake wins
+io.on('connection', socket => {
+    console.log('[NEW CONNECTION]')
+    socket.emit('init', {data: 'new connection'})
+})

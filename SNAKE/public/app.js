@@ -2,7 +2,11 @@ const canv = document.getElementById("gameCanvas");
 const ctx = canv.getContext("2d");
 const scl = 25;
 const fps = 5; 
+const socket = io()
 let food;
+let score = document.getElementById('score')
+
+socket.on('init', handleInit)
 
 //define classes
 class Snake{
@@ -20,7 +24,7 @@ class Snake{
 		this.dir.y = ydir;
 	}
 	drawSnake(){
-		ctx.fillStyle = "black";
+		ctx.fillStyle = "blue"
 		this.body.forEach(el => {
 			ctx.fillRect(el.x, el.y, scl, scl);
 		})
@@ -52,6 +56,7 @@ class Snake{
 		if(x == fx &&  y == fy){
 			createFood();
 			this.grow();
+			score.innerHTML = this.body.length - 1
 			return true;
 		}
 		return false;
@@ -91,20 +96,9 @@ function createFood(){
 }
 
 function drawFood(){
-	// ctx.fillStyle = "rgb(255,0,100)";
-	ctx.fillStyle = "#db3d59"
+	ctx.fillStyle = "red"
 	ctx.fillRect(food.x*scl, food.y*scl, scl, scl);
 }
-
-// function gridLines(){ //very slow idky
-// 	for(let i = 0; i < canv.width; i += scl){
-// 		for(let j = 0; j < canv.height; j += scl){
-// 			ctx.strokeStyle = "black"
-// 			ctx.rect(i, j, scl, scl)
-// 			ctx.stroke()
-// 		}
-// 	}
-// }
 
 let lastTime = 0;
 let deltaTime = 0;
@@ -153,6 +147,19 @@ document.addEventListener("keydown", e =>{
 	};
 });
 
+window.requestAnimationFrame(update);
+
+function handleInit(msg){
+	console.log(msg)
+}
+
+
+
+
+
+
+//--------------------------------------------------------------------------
+
 //mobile touch controls
 // document.addEventListener('touchstart', handleTouchStart, false);        
 // document.addEventListener('touchmove', handleTouchMove, false);
@@ -198,6 +205,3 @@ document.addEventListener("keydown", e =>{
 //     xDown = null;
 //     yDown = null;                                             
 // };
-
-
-window.requestAnimationFrame(update);
