@@ -5,20 +5,38 @@ const socketio = require('socket.io')
 const PORT = process.env.PORT || 3000
 
 const app = express()
-
-const server = http.createServer(app) //creating an http server
+const server = http.createServer(app) 
 const io = socketio(server)
 
-//serve public folder
+const { createGameState, gameLoop } = require('./game')
+const { FRAME_RATE } = require('./constants')
+
 app.use(express.static(path.join(__dirname, 'public')))
 
-//start server
 server.listen(PORT, () => {
     console.log(`[SERVER LISTENING ON ${PORT}]`)
 })
 
-//multiplayer - same screen two snakes one food, if 2 snakes collide game over, longest snake wins
+
 io.on('connection', socket => {
+    const state = createGameState()
+    startGameInterval(socket, state)
+
     console.log('[NEW CONNECTION]')
-    socket.emit('init', {data: 'new connection'})
 })
+
+function startGameInterval(socket, state) {
+    const intervalId = setInterval(() => {
+        const winner = gameLoop(state) //main game mechanics function, returns 0, 1, 2...(winner)
+
+        if(!winner){
+            socket.emit('gameState', JSON.stringify(state))
+        }else{
+            socket.emit('gameOver')
+            clearInterval(intervalId)
+        }
+    }, 1000 / FRAME_RATE)
+}
+
+
+//npx allows you to use npm libs without installing them
