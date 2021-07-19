@@ -84,11 +84,11 @@ class Snake{
 }
 
 function createFood(){
-	let fx = Math.random() * (canv.width / scl)  | 0;
-	let fy = Math.random() * (canv.height / scl) | 0;
+	let fx = Math.floor(Math.random() * (canv.width / scl));
+	let fy = Math.floor(Math.random() * (canv.height / scl));
 	
 	for(let cell of snake.body){
-		if(cell.x === fx && cell.y === fy){
+		if(cell.x === fx * scl && cell.y === fy * scl){
 			return createFood()
 		}
 	}
@@ -98,7 +98,7 @@ function createFood(){
 
 function drawFood(){
 	ctx.fillStyle = "red"
-	ctx.fillRect(food.x*scl, food.y*scl, scl, scl);
+	ctx.fillRect(food.x * scl, food.y * scl, scl, scl);
 }
 
 let lastTime = 0;
