@@ -1,5 +1,5 @@
 const BG_COLOR = 'whitesmoke'
-const SNAKE_COLOR = 'deepskyblue'
+const SNAKE_COLOR = 'black'
 const FOOD_COLOR= 'red'
 const socket = io()
 let scoreDisplay = document.getElementById('score')
