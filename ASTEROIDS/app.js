@@ -258,6 +258,38 @@ function update(time){
 		ctx.fillStyle = bg;
 		ctx.fillRect(0, 0, canv.width, canv.height);
 
+		//thrusting? draw thrusters before ship to send it back
+		if(ship.thrusting && !ship.dead){
+			ship.thrust.x += SHIP_THRUST*Math.cos(ship.a)/FPS;
+			ship.thrust.y -= SHIP_THRUST*Math.sin(ship.a)/FPS;
+			//draw thruster
+			//ctx.fillStyle = "white"
+			if(blinkOn && !ship.dead){
+				ctx.strokeStyle = 'red';
+				ctx.lineWidth = SHIP_SIZE/LINE_WIDTH_FACTOR;
+				ctx.beginPath();
+				ctx.moveTo( //rear left
+					ship.x - ship.r*(2/3*Math.cos(ship.a) + 0.5*Math.sin(ship.a)),
+					ship.y + ship.r*(2/3*Math.sin(ship.a) - 0.5*Math.cos(ship.a))
+					);
+				ctx.lineTo( //rear centre behind
+					ship.x - ship.r*(6/3*Math.cos(ship.a)),
+					ship.y + ship.r*(6/3*Math.sin(ship.a))
+					);
+				ctx.lineTo( //rear right of the ship
+					ship.x - ship.r*(2/3*Math.cos(ship.a) - 0.5*Math.sin(ship.a)),
+					ship.y + ship.r*(2/3*Math.sin(ship.a) + 0.5*Math.cos(ship.a))
+					);
+				ctx.closePath();
+				//ctx.fill();
+				ctx.stroke();
+			}
+		}else{
+			ship.thrust.x -= FRICTION * ship.thrust.x /FPS 
+			ship.thrust.y -= FRICTION * ship.thrust.y /FPS
+		}
+
+
 		//draw ship (TRIANGULAR)
 		if(blinkOn && !ship.dead){
 			ctx.strokeStyle = strk;
@@ -376,37 +408,6 @@ function update(time){
 
 		//rotate ship
 		ship.a += ship.rot
-
-		//thrusting?
-		if(ship.thrusting && !ship.dead){
-			ship.thrust.x += SHIP_THRUST*Math.cos(ship.a)/FPS;
-			ship.thrust.y -= SHIP_THRUST*Math.sin(ship.a)/FPS;
-			//draw thruster
-			//ctx.fillStyle = "white"
-			if(blinkOn && !ship.dead){
-				ctx.strokeStyle = strk;
-				ctx.lineWidth = SHIP_SIZE/LINE_WIDTH_FACTOR;
-				ctx.beginPath();
-				ctx.moveTo( //rear left
-					ship.x - ship.r*(2/3*Math.cos(ship.a) + 0.5*Math.sin(ship.a)),
-					ship.y + ship.r*(2/3*Math.sin(ship.a) - 0.5*Math.cos(ship.a))
-					);
-				ctx.lineTo( //rear centre behind
-					ship.x - ship.r*(6/3*Math.cos(ship.a)),
-					ship.y + ship.r*(6/3*Math.sin(ship.a))
-					);
-				ctx.lineTo( //rear right of the ship
-					ship.x - ship.r*(2/3*Math.cos(ship.a) - 0.5*Math.sin(ship.a)),
-					ship.y + ship.r*(2/3*Math.sin(ship.a) + 0.5*Math.cos(ship.a))
-					);
-				ctx.closePath();
-				//ctx.fill();
-				ctx.stroke();
-			}
-		}else{
-			ship.thrust.x -= FRICTION * ship.thrust.x /FPS 
-			ship.thrust.y -= FRICTION * ship.thrust.y /FPS
-		}
 
 		if(SHOW_COLLISION_BOUNDING){
 			ctx.strokeStyle = "blue"
