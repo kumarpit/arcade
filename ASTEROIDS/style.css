@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
 
 
@@ -12,7 +11,7 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 95vh;
+	height: 100vh;
 }
 
 .text{
@@ -24,15 +23,17 @@ body{
 
 h1{
 	font-family: "Press Start 2P";
-	/* -webkit-text-fill-color: transparent;
-	-webkit-text-stroke: white; */
 }
 
 h2{
-	font-family: "Press Start 2P";
-	font-size: 0.9em;
+	font-family: "Inter";
+	font-size: 1em;
 	font-weight: 100;
 	animation: animate 1.5s linear infinite;
+}
+
+h2 > span {
+	font-weight: bold;
 }
 
 @keyframes animate{
@@ -40,7 +41,7 @@ h2{
 	  opacity: 0;
 	}
 	50%{
-	  opacity: 0.7;
+	  opacity: 1;
 	}
 	100%{
 	  opacity: 0;
@@ -61,7 +62,6 @@ p{
 #gameCanvas{
 	background-color: slategray;
 	margin: 0;
-	/*always set canvas width and height using style in the index.html file itself to avoid blurry images*/
 }
 
 h3{
