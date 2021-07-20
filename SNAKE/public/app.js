@@ -67,7 +67,7 @@ function renderState(state){
     ctx.fillRect(food.x * scale, food.y * scale, scale, scale)
 
     renderPlayer(state.players[0], scale, SNAKE_COLOR)
-    renderPlayer(state.players[1], scale, SNAKE_COLOR)
+    renderPlayer(state.players[1], scale, 'rgba(0, 0, 0, 0.5)')
 }
 
 function renderPlayer(player, scale, color){
