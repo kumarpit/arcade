@@ -6,13 +6,27 @@
 	<script defer type="text/javascript" src="app.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 </head>
+<style>
+	#gameScreen {
+		display: none;
+	}
+</style>
 <body>
-	<div class="grid-container">
+	<div id="initialScreen">
+		<h1>Multiplayer Snake</h1>
+		<button id="newGame">NEW GAME</button>
+		<h2>or</h2>
+		<input type="text" placeholder="Enter Game Code" id="gameCode">
+		<button id="joinGame">JOIN GAME</button>
+	</div>
+
+	<div class="grid-container" id="gameScreen">
 		<div class="canvas-container">
 			<canvas id="gameCanvas" width="500" height="500"></canvas>
 		</div>
 		<div class="score-container">
 			<h1 id="score">0</h1>
+			<h1 id="codeDisplay"></h1>
 		</div>
 	</div>
 </body>
