@@ -16,7 +16,7 @@ body{
 
 .container{
 	display: flex;
-	padding: 1em;
+	padding: 1.5em 1em;
 	justify-content: space-around;
 	/* border: 6px solid black; */
 	background-color: white;
