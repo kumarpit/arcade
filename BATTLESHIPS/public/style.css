@@ -115,7 +115,7 @@ input {
 .grid {
     width: 400px;
     height: 400px;
-    background-color:deepskyblue;
+    background-color:lightskyblue;
 }
 
 .grid-user { 
@@ -127,7 +127,7 @@ input {
     width: 40px;
     height: 40px;
     outline: black solid 3px;
-    background-color: deepskyblue;
+    background-color: lightskyblue;
 }
 
 .grid-computer {
@@ -315,7 +315,7 @@ h3{
 }
 
 .hide{
-    background-color: deepskyblue !important;
+    background-color: lightskyblue !important;
 }
 
 /* .boom {
@@ -334,7 +334,7 @@ h3{
 }
 
 .boom{
-    background-color:deepskyblue;
+    background-color:lightskyblue;
 }
 
 .boom::after,
