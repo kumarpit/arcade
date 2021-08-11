@@ -1,4 +1,23 @@
 # Arcade
-A collection of a few classic arcade games such as Tetris, Asteroids and Snake tweaked to allow multiple players to play with/against one another or just single player. Includes the functionality of a live chat.
+A collection of classic arcade games:
+* Asteroids :stars:
+* Tetris :jigsaw:
+* Battleships :passenger_ship:
+* Snake :snake:
 
-NOTE: Work in Progress...
+![Javascript](https://img.shields.io/badge/Javascript-blue) ![Socket.io](https://img.shields.io/badge/Socket.io-orange) ![Node.js](https://img.shields.io/badge/Node.js-green)
+
+# How to Install
+1. Download the code for the game you want to install
+2. Head to the downloaded folder on your terminal and type **npm install** to install all dependencies
+3. Run **npm start** and head over to **https://localhost:3000**
+
+# Game Screenshots
+
+![Asteroids](https://github.com/kumarpit/arcade/blob/main/screenshots/asteroids.png)
+
+![Tetris](https://github.com/kumarpit/arcade/blob/main/screenshots/tetris.png)
+
+![Battleships](https://github.com/kumarpit/arcade/blob/main/screenshots/battleships.png)
+
+![Snake](https://github.com/kumarpit/arcade/blob/main/screenshots/snake.png)
