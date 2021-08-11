@@ -18,6 +18,6 @@ A collection of classic arcade games:
 
 ![Tetris](https://github.com/kumarpit/arcade/blob/main/screenshots/tetris.png)
 
-![Battleships](https://github.com/kumarpit/arcade/blob/main/screenshots/battleships.png)
+![Battleships](https://github.com/kumarpit/arcade/blob/screenshots/screenshots/battleships.png)
 
 ![Snake](https://github.com/kumarpit/arcade/blob/main/screenshots/snake.png)
