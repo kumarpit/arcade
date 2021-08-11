@@ -14,10 +14,10 @@ A collection of classic arcade games:
 
 # Game Screenshots
 
-![Asteroids](https://github.com/kumarpit/watchnow/blob/main/pictures/asteroids.png)
+![Asteroids](https://github.com/kumarpit/arcade/blob/main/pictures/asteroids.png)
 
-![Tetris](https://github.com/kumarpit/watchnow/blob/main/pictures/tetris.png)
+![Tetris](https://github.com/kumarpit/arcade/blob/main/pictures/tetris.png)
 
-![Battleships](https://github.com/kumarpit/watchnow/blob/main/pictures/battleships.png)
+![Battleships](https://github.com/kumarpit/arcade/blob/main/pictures/battleships.png)
 
-![Snake](https://github.com/kumarpit/watchnow/blob/main/pictures/snake.png)
+![Snake](https://github.com/kumarpit/arcade/blob/main/pictures/snake.png)
