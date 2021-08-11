@@ -10,7 +10,7 @@ A collection of classic arcade games:
 # How to Install
 1. Download the code for the game you want to install
 2. Head to the downloaded folder on your terminal and type **npm install** to install all dependencies
-3. Run **npm start** and head over to **https://localhost:3000**
+3. Run **npm start** and head over to **https://localhost:3000** in your browser
 
 # Game Screenshots
 
