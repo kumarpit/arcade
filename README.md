@@ -1,2 +1,8 @@
 # Arcade
-A collection of a few classic arcade games such as Tetris, Asteroids and Snake tweaked to allow multiple players to play with/against one another or just single player. Includes the functionality of a live chat.
+A collection of classic arcade games:
+* Asteroids :stars:
+* Tetris :jigsaw:
+* Battleships :passenger_ship:
+* Snake :snake:
+
+![Javascript](https://img.shields.io/badge/Javascript-blue) ![Socket.io](https://img.shields.io/badge/Socket.io-orange) ![Node.js](https://img.shields.io/badge/Node.js-green)
