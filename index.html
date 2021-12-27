@@ -20,6 +20,7 @@
 
             body {
                 background-color: black;
+                font-size: 12px;
             }
 
             .only {
@@ -30,21 +31,58 @@
                 align-items: center;
             }
 
-            h3 {
+            .bg {
+                position: fixed;
+                z-index: -1;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                transition: .25s;
+                pointer-events: none;
+            }
+
+            .text {
+                display: flex;
+                flex-direction: column;
+            }
+
+            a {
+                text-decoration: none;
                 color: white;
                 font-family: 'Press Start 2P', cursive;
-                margin: 15px 0;
+                font-size: 1.1rem;
+                margin: 5px 0;
             }
+
+            #asteroids:hover ~ .bg {
+                background-color: #96ff5d;
+   
+            }
+
+            #battleships:hover ~ .bg {
+                background-color: white;
+            }
+
+            #snake:hover ~ .bg {
+                background-color: #f6ae33;
+            }
+
+            #tetris:hover ~ .bg {
+                background-color: #00bfff
+            }
+
 
         </style>
     </head>
-    <body>
+    <body> 
         <div class="only">
             <div class="text">
-                <h3>Asteroids</h3>
-                <h3>Battleships</h3>
-                <h3>Snake</h3>
-                <h3>Tetris</h3>
+                <a href="./ASTEROIDS/index.html" id="asteroids">Asteroids</a>
+                <a href="./BATTLESHIPS/public/index.html" id="battleships">Battleships</a>
+                <a href="./SNAKE/public/index.html" id="snake">Snake</a>
+                <a href="./TETRIS/index.html" id="tetris">Tetris</a>
+                <div class="bg"></div>
             </div>
         </div>
         
