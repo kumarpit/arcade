@@ -1,18 +1,13 @@
 # Arcade
 A collection of classic arcade games:
-* Asteroids :stars:
-* Tetris :jigsaw:
-* Battleships :passenger_ship:
-* Snake :snake:
+- Asteroids :stars:
+- Tetris :jigsaw:
+- Battleships :passenger_ship:
+- Snake :snake:
 
-![Javascript](https://img.shields.io/badge/Javascript-blue) ![Socket.io](https://img.shields.io/badge/Socket.io-orange) ![Node.js](https://img.shields.io/badge/Node.js-green)
+Developing games is defintely a fun way to learn about programming concepts.
 
-# How to Install
-1. Download the folder of the game you want to install
-2. Head to the downloaded folder on your terminal and type **npm install** to install all dependencies
-3. Run **npm start** and head over to **https://localhost:3000**
-
-# Game Screenshots
+# Screenshots
 
 ![Asteroids](https://github.com/kumarpit/arcade/blob/main/screenshots/asteroids.png)
 
