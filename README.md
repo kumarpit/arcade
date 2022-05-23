@@ -1,11 +1,5 @@
 # Arcade
-A collection of classic arcade games:
-- Asteroids :stars:
-- Tetris :jigsaw:
-- Battleships :passenger_ship:
-- Snake :snake:
-
-Developing games is defintely a fun way to learn about programming concepts.
+A collection of classic games: Asteroids, Tetris, Battleships, Snake. These were made as personal exploration to programming and were developed by closely following tutorials online. Developing games is defintely a fun way to learn about programming concepts!
 
 # Screenshots
 
